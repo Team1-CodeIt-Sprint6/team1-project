@@ -1,11 +1,12 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { format, isSameDay } from 'date-fns';
+import { format } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import { useEffect, useRef, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 
 import CalendarInput from './CalendarInput';
+import DayMarker from './DayMarker';
 
 registerLocale('ko', ko);
 
@@ -30,16 +31,8 @@ export default function PopupDateSection({
     setReturnValue(format(date, 'yyyy-MM-dd'));
   };
 
-  const highlightToday = (date: Date) => {
-    if (isSameDay(date, today)) {
-      return 'bg-[#CED8D5] rounded-[8px]';
-    }
-    return '';
-  };
-
   return (
     <DatePicker
-      dayClassName={highlightToday}
       selected={selectedDate}
       minDate={today}
       onSelect={(date) => {
@@ -49,6 +42,14 @@ export default function PopupDateSection({
       dateFormat="yy/MM/dd"
       placeholderText="YY/MM/DD"
       customInput={<CalendarInput ref={inputRef} className="cursor-pointer" />}
+      renderDayContents={(dayOfMonth, date) => (
+        <DayMarker
+          dayOfMonth={dayOfMonth}
+          date={date}
+          today={today}
+          selectedDate={selectedDate}
+        />
+      )}
     />
   );
 }

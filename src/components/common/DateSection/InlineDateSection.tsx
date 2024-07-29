@@ -1,11 +1,11 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { format, isSameDay } from 'date-fns';
+import { format } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
 import { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 
-import CalendarInput from './CalendarInput';
+import DayMarker from './DayMarker';
 
 registerLocale('ko', ko);
 
@@ -34,13 +34,6 @@ export default function InlineDateSection({
     setReturnValue(format(date, 'yyyy-MM-dd'));
   };
 
-  const highlightToday = (date: Date) => {
-    if (isSameDay(date, today)) {
-      return 'bg-[#CED8D5] rounded-[8px]';
-    }
-    return '';
-  };
-
   return (
     <>
       {!isOpen && (
@@ -52,7 +45,6 @@ export default function InlineDateSection({
       )}
       {isOpen && (
         <DatePicker
-          dayClassName={highlightToday}
           selected={selectedDate}
           minDate={today}
           onSelect={(date) => {
@@ -62,6 +54,14 @@ export default function InlineDateSection({
           locale="ko"
           dateFormat="yy/MM/dd"
           inline
+          renderDayContents={(dayOfMonth, date) => (
+            <DayMarker
+              dayOfMonth={dayOfMonth}
+              date={date}
+              today={today}
+              selectedDate={selectedDate}
+            />
+          )}
         />
       )}
     </>
