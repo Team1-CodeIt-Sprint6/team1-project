@@ -7,7 +7,7 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 
 registerLocale('ko', ko);
 
-export default function DateSection({
+export default function InlineDateSection({
   onClick,
 }: {
   onClick: (value: string) => void;
