@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply text-kv-black;
+    @apply text-kv-md font-kv-regular text-kv-black;
   }
 }
 
