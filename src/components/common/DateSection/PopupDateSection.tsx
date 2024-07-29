@@ -44,7 +44,7 @@ export default function PopupDateSection({
       customInput={
         <CalendarInput
           ref={inputRef}
-          className="h-[40px] w-[132px] cursor-pointer pl-[10px] caret-transparent outline-none pc:h-[56px] pc:w-[379px] pc:pl-[16px] tablet:h-[56px] tablet:w-[149px] tablet:pl-[16px]"
+          className="h-[40px] w-[132px] cursor-pointer pl-[10px] caret-transparent outline-none pc:h-[56px] pc:w-[379px] pc:pl-[16px] pc:text-kv-lg tablet:h-[56px] tablet:w-[149px] tablet:pl-[16px] tablet:text-kv-lg"
         />
       }
       renderDayContents={(dayOfMonth, date) => (

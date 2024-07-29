@@ -37,7 +37,10 @@ export default function InlineDateSection({
   return (
     <>
       {!isOpen && (
-        <button onClick={toggleCalendar}>
+        <button
+          className="font-kv-semibold text-kv-primary-blue pc:font-kv-semibold tablet:text-kv-lg tablet:font-kv-semibold"
+          onClick={toggleCalendar}
+        >
           {returnValue === '날짜 선택하기'
             ? returnValue
             : format(new Date(returnValue), 'yy/MM/dd')}
