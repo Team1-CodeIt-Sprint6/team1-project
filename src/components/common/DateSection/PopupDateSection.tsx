@@ -2,8 +2,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { format, isSameDay } from 'date-fns';
 import { ko } from 'date-fns/locale/ko';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
+
+import CalendarInput from './CalendarInput';
 
 registerLocale('ko', ko);
 
@@ -15,6 +17,7 @@ export default function PopupDateSection({
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const today = new Date();
   const [returnValue, setReturnValue] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (returnValue) {
@@ -44,14 +47,8 @@ export default function PopupDateSection({
       }}
       locale="ko"
       dateFormat="yy/MM/dd"
-      placeholderText="날짜 선택하기"
-      customInput={
-        <input
-          type="text"
-          className="w-full cursor-pointer placeholder-black"
-          readOnly
-        />
-      }
+      placeholderText="YY/MM/DD"
+      customInput={<CalendarInput ref={inputRef} className="cursor-pointer" />}
     />
   );
 }

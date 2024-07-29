@@ -5,6 +5,8 @@ import { ko } from 'date-fns/locale/ko';
 import { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 
+import CalendarInput from './CalendarInput';
+
 registerLocale('ko', ko);
 
 export default function InlineDateSection({
@@ -43,7 +45,9 @@ export default function InlineDateSection({
     <>
       {!isOpen && (
         <button onClick={toggleCalendar}>
-          {format(returnValue, 'yy/MM/dd')}
+          {returnValue === '날짜 선택하기'
+            ? returnValue
+            : format(new Date(returnValue), 'yy/MM/dd')}
         </button>
       )}
       {isOpen && (
@@ -58,9 +62,6 @@ export default function InlineDateSection({
           locale="ko"
           dateFormat="yy/MM/dd"
           inline
-          customInput={
-            <input type="text" className="w-full cursor-pointer" readOnly />
-          }
         />
       )}
     </>
