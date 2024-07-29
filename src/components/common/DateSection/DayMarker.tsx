@@ -1,7 +1,6 @@
 import { isSameDay } from 'date-fns';
 import React from 'react';
 
-// DayMarker 컴포넌트 정의
 interface DayMarkerProps {
   dayOfMonth: number;
   date: Date;

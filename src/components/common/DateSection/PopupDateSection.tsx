@@ -41,7 +41,12 @@ export default function PopupDateSection({
       locale="ko"
       dateFormat="yy/MM/dd"
       placeholderText="YY/MM/DD"
-      customInput={<CalendarInput ref={inputRef} className="cursor-pointer" />}
+      customInput={
+        <CalendarInput
+          ref={inputRef}
+          className="h-[40px] w-[132px] cursor-pointer pl-[10px] caret-transparent outline-none pc:h-[56px] pc:w-[379px] pc:pl-[16px] tablet:h-[56px] tablet:w-[149px] tablet:pl-[16px]"
+        />
+      }
       renderDayContents={(dayOfMonth, date) => (
         <DayMarker
           dayOfMonth={dayOfMonth}
