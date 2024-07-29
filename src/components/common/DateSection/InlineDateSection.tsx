@@ -13,14 +13,19 @@ export default function DateSection({
   onClick: (value: string) => void;
 }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const today = new Date();
-  const [returnValue, setReturnValue] = useState('');
+  const [returnValue, setReturnValue] = useState('날짜 선택하기');
 
   useEffect(() => {
     if (returnValue) {
       onClick(returnValue);
     }
   }, [returnValue, onClick]);
+
+  const toggleCalendar = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
@@ -35,23 +40,25 @@ export default function DateSection({
   };
 
   return (
-    <DatePicker
-      dayClassName={highlightToday}
-      selected={selectedDate}
-      minDate={today}
-      onSelect={(date) => {
-        handleDateClick(date || today);
-      }}
-      locale="ko"
-      dateFormat="yy/MM/dd"
-      placeholderText="날짜 선택하기"
-      customInput={
-        <input
-          type="text"
-          className="w-full cursor-pointer placeholder-black"
-          readOnly
+    <>
+      {!isOpen && <button onClick={toggleCalendar}>{returnValue}</button>}
+      {isOpen && (
+        <DatePicker
+          dayClassName={highlightToday}
+          selected={selectedDate}
+          minDate={today}
+          onSelect={(date) => {
+            handleDateClick(date || today);
+          }}
+          onClickOutside={toggleCalendar}
+          locale="ko"
+          dateFormat="yy/MM/dd"
+          inline
+          customInput={
+            <input type="text" className="w-full cursor-pointer" readOnly />
+          }
         />
-      }
-    />
+      )}
+    </>
   );
 }
