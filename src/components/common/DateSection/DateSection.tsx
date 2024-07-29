@@ -12,7 +12,7 @@ export default function DateSection({
 }: {
   onClick: (value: string) => void;
 }) {
-  const [startDate, setStartDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const today = new Date();
   const [returnValue, setReturnValue] = useState('');
 
@@ -23,11 +23,10 @@ export default function DateSection({
   }, [returnValue, onClick]);
 
   const handleDateClick = (date: Date) => {
-    setStartDate(date);
+    setSelectedDate(date);
     setReturnValue(format(date, 'yyyy-MM-dd'));
   };
 
-  //현재 일자에 해당하는 스타일 적용
   const highlightToday = (date: Date) => {
     if (isSameDay(date, today)) {
       return 'bg-[#CED8D5] rounded-[8px]';
@@ -36,25 +35,23 @@ export default function DateSection({
   };
 
   return (
-    <div className="pb-18px gap-16px flex flex-col">
-      <p>시작일</p>
-      <DatePicker
-        dayClassName={highlightToday}
-        selected={startDate}
-        minDate={today}
-        onSelect={(date) => {
-          handleDateClick(date || startDate);
-        }}
-        locale="ko"
-        dateFormat="yy/MM/dd"
-        customInput={
-          <input
-            type="text"
-            className="border-gray30 w-full cursor-pointer rounded-lg border px-4 py-[16px]"
-            readOnly
-          />
-        }
-      />
-    </div>
+    <DatePicker
+      dayClassName={highlightToday}
+      selected={selectedDate}
+      minDate={today}
+      onSelect={(date) => {
+        handleDateClick(date || today);
+      }}
+      locale="ko"
+      dateFormat="yy/MM/dd"
+      placeholderText="날짜 선택하기"
+      customInput={
+        <input
+          type="text"
+          className="w-full cursor-pointer placeholder-black"
+          readOnly
+        />
+      }
+    />
   );
 }
