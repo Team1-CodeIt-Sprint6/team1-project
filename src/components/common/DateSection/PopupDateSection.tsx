@@ -50,6 +50,7 @@ export default function PopupDateSection({
           selectedDate={selectedDate}
         />
       )}
+      className="react-datepicker"
     />
   );
 }

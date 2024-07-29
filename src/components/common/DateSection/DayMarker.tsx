@@ -17,7 +17,8 @@ export default function DayMarker({
 }: DayMarkerProps): JSX.Element {
   const isToday = isSameDay(date, today);
   const isSelected = selectedDate && isSameDay(date, selectedDate);
-  let className = 'px-[6px] py-[6px] rounded-[8px] font-kv-regular ';
+  let className =
+    'w-[34px] h-[32px] justify-center items-center flex rounded-[8px] font-kv-regular ';
 
   if (isToday) {
     className += 'bg-[#E0E5FF] text-kv-primary-blue ';
@@ -26,5 +27,5 @@ export default function DayMarker({
     className += 'bg-kv-primary-blue text-white ';
   }
 
-  return <span className={className}>{dayOfMonth}</span>;
+  return <div className={className}>{dayOfMonth}</div>;
 }
