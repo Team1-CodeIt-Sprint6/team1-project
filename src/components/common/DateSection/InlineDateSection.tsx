@@ -41,7 +41,11 @@ export default function InlineDateSection({
 
   return (
     <>
-      {!isOpen && <button onClick={toggleCalendar}>{returnValue}</button>}
+      {!isOpen && (
+        <button onClick={toggleCalendar}>
+          {format(returnValue, 'yy/MM/dd')}
+        </button>
+      )}
       {isOpen && (
         <DatePicker
           dayClassName={highlightToday}
