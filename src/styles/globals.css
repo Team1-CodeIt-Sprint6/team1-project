@@ -12,21 +12,7 @@
 }
 
 @layer components {
-  /* 프로필 LNB */
-  .lnb-wrapper {
-    @apply w-full max-w-[360px] rounded-3xl border border-kv-gray-300 p-6 shadow-lg;
-  }
-
-  .lnb-link {
-    @apply flex gap-3.5 rounded-xl fill-current px-5 py-2.5 font-kv-semibold text-kv-gray-600 transition ease-in-out;
-  }
-
-  .lnb-link:hover,
-  .lnb-link-active {
-    @apply bg-kv-primary-blue-light text-kv-primary-blue;
-  }
-
   .icon-size {
-    @apply h-6 w-6;
+    @apply h-6 w-6; /* width: 24px, hegiht: 24px */
   }
 }
