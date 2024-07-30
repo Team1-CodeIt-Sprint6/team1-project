@@ -28,7 +28,23 @@
   @apply !bg-inherit text-kv-red;
 }
 
+.react-datepicker__day--keyboard-selected {
+  @apply !animate-fadeIn !bg-inherit;
+}
+
 .react-datepicker__month {
   @apply !pr-[10px];
 }
 /* date picker styles */
+
+/* DayMarker styles */
+@layer components {
+  .day-marker-today {
+    @apply bg-[#E0E5FF] text-kv-primary-blue;
+  }
+
+  .day-marker-selected {
+    @apply bg-kv-primary-blue text-white;
+  }
+}
+/* DayMarker styles */
