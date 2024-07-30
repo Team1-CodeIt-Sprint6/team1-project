@@ -42,7 +42,7 @@ const config: Config = {
         },
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',
-          light: '#F1EFFD',
+          light: '#E0E5FF',
         },
         'kv-blue': {
           DEFAULT: '#0085ff',

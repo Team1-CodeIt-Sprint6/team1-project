@@ -11,6 +11,12 @@
   }
 }
 
+@layer components {
+  .icon-size {
+    @apply h-6 w-6; /* width: 24px, hegiht: 24px */
+  }
+}
+
 /* date picker custom styles */
 .react-datepicker__header {
   @apply !border-b-0 !bg-white !pb-0;
