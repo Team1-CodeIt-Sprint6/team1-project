@@ -1,4 +1,4 @@
-import { ModalProps } from '@/components/common/Modal/types';
+import { ModalProps } from '@/components/common//Modal/types';
 import { BUTTON_TEXTS, DEFAULT_MESSAGES } from '@/constants/modalConstants';
 
 export default function AlertModal({ message, onClose }: ModalProps) {
