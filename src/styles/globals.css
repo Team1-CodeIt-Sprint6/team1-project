@@ -15,4 +15,8 @@
   .icon-size {
     @apply h-6 w-6; /* width: 24px, hegiht: 24px */
   }
+
+  .size-my-image {
+    @apply size-[167px] pc:size-[180px] tablet:size-[206px];
+  }
 }
