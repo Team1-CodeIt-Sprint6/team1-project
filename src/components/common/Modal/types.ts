@@ -11,7 +11,7 @@ export interface ModalContainerProps {
   children: () => ReactNode;
 }
 
-export interface CustomModalProps extends ModalProps {
+export interface ModalSelectorProps extends ModalProps {
   isOpen: boolean;
   type: 'alert' | 'confirm';
 }
