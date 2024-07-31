@@ -1,19 +1,13 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { ModalContainerProps } from '@/components/common/Modal/types';
 
-interface ModalTemplateProps extends ModalProps {
-  children: () => ReactNode;
-}
-
-export default function ModalTemplate({
+export default function ModalContainer({
   children,
   isOpen,
   onClose,
-}: ModalTemplateProps) {
+}: ModalContainerProps) {
+  // 모달 아래 페이지 스크롤 방지
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';

@@ -1,16 +1,10 @@
 import React from 'react';
 
+import { CustomModalProps } from '@/components/common/Modal/types';
+
 import AlertModal from './CustomModals/AlertModal';
 import ConfirmModal from './CustomModals/ConfirmModal';
-import ErrorModal from './CustomModals/ErrorModal';
-import ModalTemplate from './ModalTemplate';
-
-interface CustomModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  message?: string;
-  type: 'alert' | 'confirm' | 'error';
-}
+import ModalTemplate from './ModalContainer';
 
 export default function CustomModal({
   isOpen,
@@ -23,7 +17,6 @@ export default function CustomModal({
   const modalComponents = {
     alert: AlertModal,
     confirm: ConfirmModal,
-    error: ErrorModal,
   } as const;
 
   const ModalContent = modalComponents[type];
