@@ -6,23 +6,26 @@ interface ModalProps {
 }
 
 export default function ConfirmModal({ message, onClose }: ModalProps) {
+  const buttonBaseClass =
+    'absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium hover:bg-kv-blue';
+
   return (
-    <div className="pointer-events-auto relative flex h-[220px] w-[327px] flex-col rounded-lg bg-white shadow-lg pc:h-[250px] pc:w-[540px] tablet:h-[250px] tablet:w-[540px]">
+    <div className="pointer-events-auto relative flex h-[184px] w-[298px] flex-col rounded-lg bg-white shadow-lg">
+      <CheckIcon className="absolute mx-auto mt-[24px] h-6 w-full" />
       <div className="flex flex-grow items-center justify-center px-6">
-        <CheckIcon className="mr-2 h-6 w-6" />
-        <p className="mb-[28px] max-h-[96px] overflow-hidden text-center font-kv-medium pc:text-kv-2lg tablet:text-kv-2lg">
-          {message || '메세지가 없습니다.'}
+        <p className="mb-[28px] max-h-[48px] overflow-hidden text-center font-kv-medium">
+          {message || '예약을 취소하시겠습니까?'}
         </p>
       </div>
       <button
         onClick={onClose}
-        className="inset-x-0 bottom-[68px] m-auto h-[42px] w-[138px] rounded-[8px] bg-kv-primary-blue text-kv-md font-kv-medium text-white hover:bg-kv-blue pc:right-[28px] pc:mr-0 pc:text-kv-lg tablet:right-[28px] tablet:mr-0 tablet:text-kv-lg"
+        className={`${buttonBaseClass} left-[65px] border-2 border-kv-primary-blue bg-white text-kv-lg text-kv-primary-blue`}
       >
         아니오
       </button>
       <button
         onClick={onClose}
-        className="absolute inset-x-0 bottom-[28px] m-auto h-[42px] w-[138px] rounded-[8px] bg-kv-primary-blue text-kv-md font-kv-medium text-white hover:bg-kv-blue pc:right-[28px] pc:mr-0 pc:text-kv-lg tablet:right-[28px] tablet:mr-0 tablet:text-kv-lg"
+        className={`${buttonBaseClass} right-[65px] bg-kv-primary-blue font-kv-bold text-white`}
       >
         취소하기
       </button>
