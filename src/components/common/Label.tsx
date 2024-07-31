@@ -5,10 +5,7 @@ function Label({
   children,
 }: React.LabelHTMLAttributes<HTMLLabelElement>) {
   return (
-    <label
-      htmlFor={htmlFor}
-      className="text-base leading-[1.7] text-kv-gray-400"
-    >
+    <label htmlFor={htmlFor} className="font-kv-medium kv-text-lg">
       {children}
     </label>
   );
