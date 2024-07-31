@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface HeaderUserProfileProps {
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   nickname: string;
 }
 
