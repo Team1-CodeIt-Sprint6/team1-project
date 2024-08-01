@@ -38,7 +38,8 @@
     "jira-prepare-commit-msg": "^1.7.2",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
