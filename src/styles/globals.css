@@ -10,3 +10,9 @@
     @apply text-kv-md font-kv-regular text-kv-black;
   }
 }
+
+@layer components {
+  .icon-size {
+    @apply h-6 w-6; /* width: 24px, hegiht: 24px */
+  }
+}
