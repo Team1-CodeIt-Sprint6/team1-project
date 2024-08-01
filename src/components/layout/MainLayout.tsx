@@ -15,18 +15,30 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     router.pathname === '/signin' || router.pathname === '/signup';
   const needsSidebar = ![
     '/',
-    '/experience-detail',
+    '/experience-detail', //주소 이름 변경 필요
     '/signin',
     '/signup',
   ].includes(router.pathname);
   const isMainPage = router.pathname === '/';
+
+  //로그인 정보, 유저 정보 받아오는 로직 필요
+  const isLoggedIn = true;
+  const currentUser = {
+    id: 1,
+    email: 'user@example.com',
+    nickname: '김체리',
+    profileImageUrl:
+      'https://i.pinimg.com/564x/2e/79/91/2e79919eb6b27e2e994ccbf51cc4bf41.jpg',
+    createdAt: '2023-01-01T00:00:00.000Z',
+    updatedAt: '2023-01-01T00:00:00.000Z',
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
       {!isAuthPage && (
         <>
           <div className="fixed left-0 right-0 top-0 z-10">
-            <Header isLoggedIn={true} user={mockUser} />
+            <Header isLoggedIn={isLoggedIn} user={currentUser} />
           </div>
           <div className="h-[70px] w-full" />
         </>
@@ -48,14 +60,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                   <LeftNavBar />
                 </div>
               )}
-              <main className={`flex-1 bg-gray-300`}>{children}</main>
+              <main className={`flex-1`}>{children}</main>
             </div>
           </div>
         </>
       )}
 
       {(isAuthPage || isMainPage) && (
-        <main className={`flex-1 bg-gray-300`}>{children}</main>
+        <main className={`flex-1`}>{children}</main>
       )}
 
       {!isAuthPage && (
@@ -69,13 +81,3 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 };
 
 export default MainLayout;
-
-const mockUser = {
-  id: 1,
-  email: 'user@example.com',
-  nickname: '김체리',
-  profileImageUrl:
-    'https://i.pinimg.com/564x/2e/79/91/2e79919eb6b27e2e994ccbf51cc4bf41.jpg',
-  createdAt: '2023-01-01T00:00:00.000Z',
-  updatedAt: '2023-01-01T00:00:00.000Z',
-};
