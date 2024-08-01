@@ -5,7 +5,7 @@ import IconCalendarInput from '@/assets/icons/icon_calendar_input.svg';
 const CalendarInput = forwardRef<
   HTMLInputElement,
   React.InputHTMLAttributes<HTMLInputElement>
->((props, ref) => {
+>(function CalendarInput(props, ref) {
   return (
     <div className="relative flex items-center justify-between">
       <input ref={ref} type="text" readOnly {...props} />
