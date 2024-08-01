@@ -30,36 +30,34 @@ function Header({ isLoggedIn, user }: HeaderProps) {
             />
           </div>
         </Link>
-        <div>
-          {isLoggedIn ? (
-            <div className="flex h-full items-center">
-              <button className="" onClick={handleNotificationClick}>
-                <Image
-                  src="/assets/icons/Icon_notification.svg"
-                  alt="알림"
-                  width={20}
-                  height={20}
-                />
-              </button>
-              <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
-              <Link href="/my-account">
-                <HeaderUserProfile
-                  nickname={user.nickname}
-                  profileImageUrl={user.profileImageUrl}
-                />
-              </Link>
-            </div>
-          ) : (
-            <div className="flex w-[111px] justify-between">
-              <Link href="/login">
-                <span className={`${LINK_STYLES}`}>로그인</span>
-              </Link>
-              <Link href="/signup">
-                <span className={`${LINK_STYLES}`}>회원가입</span>
-              </Link>
-            </div>
-          )}
-        </div>
+        {isLoggedIn ? (
+          <div className="flex h-full items-center">
+            <button className="" onClick={handleNotificationClick}>
+              <Image
+                src="/assets/icons/icon_notification.svg"
+                alt="알림"
+                width={20}
+                height={20}
+              />
+            </button>
+            <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
+            <Link href="/profile">
+              <HeaderUserProfile
+                nickname={user.nickname}
+                profileImageUrl={user.profileImageUrl}
+              />
+            </Link>
+          </div>
+        ) : (
+          <div className="flex w-[111px] justify-between">
+            <Link href="/login">
+              <span className={`${LINK_STYLES}`}>로그인</span>
+            </Link>
+            <Link href="/signup">
+              <span className={`${LINK_STYLES}`}>회원가입</span>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );
