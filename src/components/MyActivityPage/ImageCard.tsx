@@ -21,8 +21,7 @@ export default function ImageCard({ image, onClickDelete }: ImageProps) {
         src={image}
         alt="이미지"
         fill
-        style={{ objectFit: 'cover' }}
-        className="rounded-2xl"
+        className="rounded-2xl object-cover"
       />
       {/* 이미지 삭제 버튼 */}
       <button
