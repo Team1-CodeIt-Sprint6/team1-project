@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 
+import CalendarInput from '@/components/common/DatePicker/CalendarInput';
+import { getCommonDatePickerProps } from '@/components/common/DatePicker/getCommonDatePickerProps';
 import { POPUP_DATE_SECTION_PLACEHOLDER_TEXT } from '@/constants/datePickerConstants';
 import useCalendar from '@/hooks/useCalender';
-
-import CalendarInput from './CalendarInput';
-import { getCommonDatePickerProps } from './getCommonDatePickerProps';
 
 export default function PopupDateSection({
   onClick,

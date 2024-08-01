@@ -1,9 +1,8 @@
 import DatePicker from 'react-datepicker';
 
+import { getCommonDatePickerProps } from '@/components/common/DatePicker/getCommonDatePickerProps';
 import useCalendar from '@/hooks/useCalender';
 import { formatDate } from '@/lib/utils/foramtDate';
-
-import { getCommonDatePickerProps } from './getCommonDatePickerProps';
 
 export default function InlineDateSection({
   onClick,

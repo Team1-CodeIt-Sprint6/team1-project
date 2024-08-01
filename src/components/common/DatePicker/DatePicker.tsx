@@ -4,8 +4,8 @@ import { ko } from 'date-fns/locale/ko';
 import React, { useEffect } from 'react';
 import { registerLocale } from 'react-datepicker';
 
-import InlineDateSection from './InlineDateSection';
-import PopupDateSection from './PopupDateSection';
+import InlineDateSection from '@/components/common/DatePicker/InlineDateSection';
+import PopupDateSection from '@/components/common/DatePicker/PopupDateSection';
 
 type DatePickerProps = {
   onClick: (value: string) => void;
