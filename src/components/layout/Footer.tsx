@@ -12,28 +12,28 @@ function Footer() {
         <div className="flex gap-3">
           <a href="https://facebook.com">
             <img
-              src="/assets/icons/icon-facebook.svg"
+              src="/assets/icons/icon_facebook.svg"
               alt="Facebook"
               className="icon h-5 w-5 fill-current"
             />
           </a>
           <a href="https://twitter.com">
             <img
-              src="/assets/icons/icon-twitter.svg"
+              src="/assets/icons/icon_twitter.svg"
               alt="Twitter"
               className="h-5 w-5"
             />
           </a>
           <a href="https://instagram.com">
             <img
-              src="/assets/icons/icon-instagram.svg"
+              src="/assets/icons/icon_instagram.svg"
               alt="Instagram"
               className="h-5 w-5"
             />
           </a>
           <a href="https://youtube.com">
             <img
-              src="/assets/icons/icon-youtube.svg"
+              src="/assets/icons/icon_youtube.svg"
               alt="YouTube"
               className="h-5 w-5"
             />

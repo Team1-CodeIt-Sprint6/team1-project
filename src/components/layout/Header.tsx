@@ -18,7 +18,7 @@ function Header({ isLoggedIn, user }: HeaderProps) {
   };
 
   return (
-    <header className="flex items-center justify-center border-b border-gray-300 p-4">
+    <header className="flex items-center justify-center border-b border-gray-300 bg-white p-4">
       <div className="mx-5 flex h-[30px] w-full justify-between pc:w-[1200px] tablet:mx-6 tablet:w-full">
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
