@@ -1,4 +1,3 @@
-import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/common/Button';
@@ -6,11 +5,11 @@ import ErrorText from '@/components/common/ErrorText';
 import Input from '@/components/common/Input';
 import Label from '@/components/common/Label';
 
-interface ILoginProps {
+interface LoginProps {
   email: string;
   password: string;
 }
-const onSubmit: SubmitHandler<ILoginProps> = () => {};
+const onSubmit: SubmitHandler<LoginProps> = () => {};
 const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 
 export default function Login() {
@@ -19,7 +18,7 @@ export default function Login() {
     setError,
     handleSubmit,
     formState: { isSubmitting, errors, isValid },
-  } = useForm<ILoginProps>({ mode: 'onChange' });
+  } = useForm<LoginProps>({ mode: 'onChange' });
 
   return (
     <form
@@ -64,7 +63,11 @@ export default function Login() {
           {errors.password && <ErrorText>{errors.password?.message}</ErrorText>}
         </div>
       </div>
-      <Button disabled={!isValid || isSubmitting} type="submit">
+      <Button
+        disabled={!isValid || isSubmitting}
+        type="submit"
+        className={`${!isValid || isSubmitting ? 'bg-kv-gray-600' : 'bg-kv-primary-blue'}`}
+      >
         로그인 하기
       </Button>
     </form>
