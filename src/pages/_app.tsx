@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import MainLayout from '@/components/layout/MainLayout';
 
 const pretendard = localFont({
   src: '../../public/static/PretendardVariable.woff2',
@@ -16,9 +17,9 @@ const pretendard = localFont({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main className={`${pretendard.variable} font-pretendard`}>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
     </main>
   );
 }
