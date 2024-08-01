@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -39,6 +40,7 @@ const config: Config = {
           700: '#6B7280',
           800: '#374151',
           900: '#1F2937',
+          '4b': '#4b4b4b',
         },
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',
@@ -70,7 +72,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily: {
-        pretendard: ['Pretendard', 'sans-serif'],
+        pretendard: ['var(--font-pretendard)', 'sans-serif'],
       },
       screens: {
         pc: { min: '1200px' },
