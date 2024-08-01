@@ -17,12 +17,10 @@ export default function DatePicker({ onClick, variant }: DatePickerProps) {
     registerLocale('ko', ko);
   }, []);
 
-  const variantComponents = {
-    inline: InlineDateSection,
-    popup: PopupDateSection,
-  };
-
-  const SelectedComponent = variantComponents[variant];
-
-  return <SelectedComponent onClick={onClick} />;
+  return (
+    <>
+      {variant === 'inline' && <InlineDateSection onClick={onClick} />}
+      {variant === 'popup' && <PopupDateSection onClick={onClick} />}
+    </>
+  );
 }
