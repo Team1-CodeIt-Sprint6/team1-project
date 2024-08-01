@@ -1,8 +1,7 @@
-import { format, isValid, parseISO } from 'date-fns';
 import DatePicker from 'react-datepicker';
 
-import { SELECTED_DATE_FORMAT } from '@/constants/datePickerConstants';
 import useCalendar from '@/hooks/useCalender';
+import { formatDate } from '@/lib/utils/foramtDate';
 
 import { getCommonDatePickerProps } from './getCommonDatePickerProps';
 
@@ -25,11 +24,6 @@ export default function InlineDateSection({
     today,
     handleDateClick,
   );
-
-  const formatDate = (dateString: string) => {
-    const date = parseISO(dateString);
-    return isValid(date) ? format(date, SELECTED_DATE_FORMAT) : dateString;
-  };
 
   const dateComponents = {
     closedCalendar: (
