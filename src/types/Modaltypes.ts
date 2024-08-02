@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface ModalProps {
+export interface CustomModalProps {
   message?: string;
   onClose: () => void;
 }
@@ -11,9 +11,14 @@ export interface ModalContainerProps {
   children: () => ReactNode;
 }
 
-export interface ModalSelectorProps extends ModalProps {
+export interface ModalProps extends CustomModalProps {
   isOpen: boolean;
   type: 'alert' | 'confirm';
 }
 
-export type ModalType = 'alert' | 'confirm';
+export const MODAL_TYPES = {
+  ALERT: 'alert',
+  CONFIRM: 'confirm',
+} as const;
+
+export type ModalType = (typeof MODAL_TYPES)[keyof typeof MODAL_TYPES];

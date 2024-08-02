@@ -1,32 +1,32 @@
 import CheckIcon from 'public/assets/icons/icon_check.svg';
 
-import { ModalProps } from '@/components/common/Modal/types';
+import Button from '@/components/common/Button';
 import { BUTTON_TEXTS, DEFAULT_MESSAGES } from '@/constants/modalConstants';
+import { CustomModalProps } from '@/types/Modaltypes';
 
-export default function ConfirmModal({ message, onClose }: ModalProps) {
-  const buttonBaseClass =
-    'absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium';
-
+export default function ConfirmModal({ message, onClose }: CustomModalProps) {
   return (
-    <div className="pointer-events-auto relative flex h-[184px] w-[298px] flex-col rounded-lg bg-white shadow-lg">
+    <div className="modal-container h-[184px] w-[298px]">
       <CheckIcon className="absolute mx-auto mt-[24px] h-6 w-full" />
-      <div className="flex flex-grow items-center justify-center px-6">
-        <p className="mb-[28px] max-h-[48px] overflow-hidden text-center font-kv-medium">
+      <div className="modal-content">
+        <p className="modal-text max-h-[48px]">
           {message || DEFAULT_MESSAGES.CONFIRM}
         </p>
       </div>
-      <button
+      <Button
+        type="button"
         onClick={onClose}
-        className={`${buttonBaseClass} left-[65px] border-2 border-kv-primary-blue bg-white text-kv-lg text-kv-primary-blue hover:border-kv-blue hover:bg-kv-gray-200`}
+        className={`modal-button-common left-[65px] border-2 border-kv-primary-blue bg-white py-0 text-kv-lg text-kv-primary-blue hover:border-kv-blue hover:bg-kv-gray-200`}
       >
         {BUTTON_TEXTS.NO}
-      </button>
-      <button
+      </Button>
+      <Button
+        type="button"
         onClick={onClose}
-        className={`${buttonBaseClass} right-[65px] bg-kv-primary-blue font-kv-bold text-white hover:bg-kv-blue`}
+        className={`modal-button-common right-[65px] bg-kv-primary-blue py-0 text-kv-md font-kv-bold text-white hover:bg-kv-blue`}
       >
         {BUTTON_TEXTS.YES}
-      </button>
+      </Button>
     </div>
   );
 }
