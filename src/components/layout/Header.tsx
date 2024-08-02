@@ -3,22 +3,17 @@ import Link from 'next/link';
 import React from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
+import { useAuth } from '@/hooks/useAuth';
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-  user?: {
-    nickname: string;
-    profileImageUrl: string | null;
-  };
-}
+function Header() {
+  const { isLoggedIn, user } = useAuth();
 
-function Header({ isLoggedIn, user }: HeaderProps) {
   const handleNotificationClick = () => {
     //알림 컴포넌트 나오는 로직
   };
 
   return (
-    <header className="align-center h-[70px] border-b border-gray-300 bg-white p-4">
+    <header className="h-[70px] border-b border-gray-300 bg-white p-4 align-center">
       <div className="layout-content-container h-[30px] justify-between">
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
