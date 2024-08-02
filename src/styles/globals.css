@@ -73,5 +73,20 @@
   .footer-link-styles{
     @apply font-sans text-base font-normal;
   }
+  .layout-container{
+    @apply flex min-h-screen flex-col;
+  }
+  .layout-header-wrapper{
+    @apply fixed left-0 right-0 top-0 z-10;
+  }
+  .layout-header-spacer {
+    @apply h-[70px] w-full;
+  }
+  .layout-content-margin-top {
+    @apply min-h-6;
+  }
+  .layout-content-margin-bottom {
+    @apply h-[120px] w-full;
+  }
 }
 /* Layout styles */
