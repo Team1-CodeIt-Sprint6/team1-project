@@ -16,7 +16,7 @@ export default function ImageCard({ image, onClickDelete }: ImageProps) {
   };
 
   return (
-    <div className="size-my-image relative">
+    <div className="size-my-act-img relative">
       <Image
         src={image}
         alt="이미지"
