@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { getCookies } from 'cookies-next';
 
-import { updateAccessToken } from './updateAccessToken';
+import { updateAccessToken } from './postApis';
 
 const instance = axios.create({
   baseURL: 'https://sp-globalnomad-api.vercel.app/6-1',
