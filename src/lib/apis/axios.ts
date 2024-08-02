@@ -4,7 +4,7 @@ import { getCookies } from 'cookies-next';
 import { updateAccessToken } from './postApis';
 
 const instance = axios.create({
-  baseURL: 'https://sp-globalnomad-api.vercel.app/6-1',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 instance.interceptors.request.use((config) => {
