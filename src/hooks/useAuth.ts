@@ -1,5 +1,5 @@
+import { getCookie } from 'cookies-next';
 import { useAtom } from 'jotai';
-import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 
 import { getUserMe } from '@/lib/apis/userApis';
@@ -11,7 +11,7 @@ export const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
 
   useEffect(() => {
-    const accessToken = Cookies.get('accessToken');
+    const accessToken = getCookie('accessToken');
     if (accessToken) {
       setIsLoggedIn(true);
       getUserMe(accessToken).then(setUser).catch(console.error);
@@ -26,7 +26,7 @@ export const useAuth = () => {
   // const logout = () => {
   //   setIsLoggedIn(false);
   //   setUser(null);
-  //   Cookies.remove('accessToken');
+  //   removeCookie('accessToken');
   // };
 
   return { isLoggedIn, user };
