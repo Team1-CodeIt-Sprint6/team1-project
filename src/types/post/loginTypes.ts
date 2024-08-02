@@ -1,4 +1,4 @@
-import { User } from '@/types/User.interface';
+import { User } from '@/types/userTypes';
 
 export interface LogInForm {
   email: string;

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import useLogIn from '@/hooks/useLogin';
-import { LogInForm } from '@/types/post/Login.interface';
+import { LogInForm } from '@/types/post/loginTypes';
 
 export default function Login() {
   const isValid = true; // 임시로 true 지정
