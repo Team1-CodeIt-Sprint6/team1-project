@@ -1,16 +1,27 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-import UserProfile from '@/components/userProfile/UploadProfile';
+import EditProfileImage from '@/components/userProfile/EditProfileImage';
 import { MENU_ITEMS } from '@/constants/lnbMenuItems';
 
 export default function LeftNaviBar() {
   const router = useRouter();
+  const [profileImage, setProfileImage] = useState<string>('');
+
+  const handleImageUpload = (profileImage: string) => {
+    setProfileImage(profileImage);
+  };
 
   return (
     <div className={LNB_STYLES.wrapper}>
-      {/* TODO 프로필 이미지 불러오기 */}
-      <UserProfile initialProfile="" />
+      {/* 프로필 이미지 컴포넌트 */}
+      <EditProfileImage
+        initialImage={profileImage}
+        onImageUpload={handleImageUpload}
+      />
+
+      {/* 네비게이션 메뉴 */}
       <div className="flex flex-col gap-2">
         {MENU_ITEMS.map((item) => {
           const isActive = router.pathname === item.href;

@@ -1,47 +1,16 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import ErrorText from '@/components/common/ErrorText';
+import { getUserData } from '@/lib/api/getUserData';
+import { updateUserData } from '@/lib/api/updateUserData';
 
-interface ProfileProps {
+export interface ProfileProps {
   email: string;
   nickname: string;
   password: string;
   newPassword: string;
 }
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIwLCJ0ZWFtSWQiOiI2LTEiLCJpYXQiOjE3MjI1OTg1NjAsImV4cCI6MTcyMjYwMDM2MCwiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.1XkhLRPq9mUkuE2VK0Zq1bBhyBE4dBukyYHNUqohk3g';
-
-// 유저 정보 요청 함수
-const getUserData = async () => {
-  const res = await axios.get(
-    'https://sp-globalnomad-api.vercel.app/6-1/users/me',
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  return res.data;
-};
-
-// 닉네임 수정 요청 함수
-const updateUserData = async (data: Partial<ProfileProps>) => {
-  const res = await axios.patch(
-    'https://sp-globalnomad-api.vercel.app/6-1/users/me',
-    data,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  return res.data;
-};
 
 export default function EditProfileForm() {
   const {
