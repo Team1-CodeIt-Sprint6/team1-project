@@ -37,7 +37,9 @@
   "dependencies": {
     "@tanstack/react-query": "^5.51.18",
     "@tanstack/react-query-devtools": "^5.51.16",
+    "classnames": "^2.5.1",
     "axios": "^1.7.3",
+    "cookies-next": "^4.2.1",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.12",
     "jira-prepare-commit-msg": "^1.7.2",

@@ -44,6 +44,8 @@ const config: Config = {
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',
           light: '#E0E5FF',
+          hover: '#2f48c4',
+          active: '#152ead',
         },
         'kv-blue': {
           DEFAULT: '#0085ff',
@@ -139,7 +141,12 @@ const config: Config = {
           fontSize: theme('fontSize.kv-xs[0]'),
           lineHeight: theme('fontSize.kv-xs[1].lineHeight'),
         },
-      } as Record<string, { fontSize: string; lineHeight: string }>;
+        '.align-center': {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      } as Record<string, { [key: string]: string }>;
       addUtilities(newUtilities);
     }),
   ],
