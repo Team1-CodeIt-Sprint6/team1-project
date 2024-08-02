@@ -3,14 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import ErrorText from '@/components/common/ErrorText';
 import { getUserData } from '@/lib/apis/getUserData';
-import { updateUserData } from '@/lib/apis/updateUserData';
-
-export interface ProfileProps {
-  email: string;
-  nickname: string;
-  password: string;
-  newPassword: string;
-}
+import { ProfileProps, updateUserData } from '@/lib/apis/updateUserData';
 
 export default function EditProfileForm() {
   const {

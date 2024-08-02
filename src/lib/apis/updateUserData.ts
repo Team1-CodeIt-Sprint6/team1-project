@@ -1,9 +1,14 @@
 import axios from 'axios';
 
-import { ProfileProps } from '@/components/userProfile/EditProfileForm';
+import { token } from './getPresignedUrl';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIwLCJ0ZWFtSWQiOiI2LTEiLCJpYXQiOjE3MjI2MjY4MzMsImV4cCI6MTcyMjYyODYzMywiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.ven9YdSBpi-yV4JTV54Zt3vQc1pBy2PUJ4sjv2y1vPs';
+export interface ProfileProps {
+  email: string;
+  nickname: string;
+  password: string;
+  newPassword: string;
+  profileImageUrl: string;
+}
 
 // 유저 정보 수정 요청 함수
 export const updateUserData = async (data: Partial<ProfileProps>) => {

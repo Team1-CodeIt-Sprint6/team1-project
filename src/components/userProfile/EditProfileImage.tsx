@@ -5,6 +5,7 @@ import PenIcon from '@/assets/icons/icon_pen.svg';
 import DefaultProfile from '@/assets/images/profile_default_img.png';
 import { createPresignedUrl, uploadUrlToS3 } from '@/lib/apis/getPresignedUrl';
 import { getUserData } from '@/lib/apis/getUserData';
+import { updateUserData } from '@/lib/apis/updateUserData';
 
 /**
  * NOTE: 프로필 이미지 입력받는 컴포넌트
@@ -29,14 +30,16 @@ export default function EditProfileImage({
     if (file) {
       try {
         const presignedUrl = await createPresignedUrl(file);
-        await uploadUrlToS3(presignedUrl, file);
 
         const profileUrl = presignedUrl.split('?')[0];
+
         setProfileImage(profileUrl);
 
         if (onImageUpload) {
           onImageUpload(profileUrl);
         }
+
+        await updateUserData({ profileImageUrl: profileUrl });
       } catch (error) {
         console.error('이미지 업로드 실패:', error);
       }

@@ -4,8 +4,8 @@ interface UrlProps {
   profileImageUrl: string;
 }
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIwLCJ0ZWFtSWQiOiI2LTEiLCJpYXQiOjE3MjI2MjY4MzMsImV4cCI6MTcyMjYyODYzMywiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.ven9YdSBpi-yV4JTV54Zt3vQc1pBy2PUJ4sjv2y1vPs';
+export const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIwLCJ0ZWFtSWQiOiI2LTEiLCJpYXQiOjE3MjI2MzA2MjgsImV4cCI6MTcyMjYzMjQyOCwiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.BzW4LHMfDDrN4Ouh76KuIa4WfkPdYLtB5KmTUGaY2I0';
 
 export const createPresignedUrl = async (file: File) => {
   const formData = new FormData();
@@ -21,14 +21,7 @@ export const createPresignedUrl = async (file: File) => {
       },
     },
   );
-
-  const presignedUrl = res.data.profileImageUrl;
-
-  if (!presignedUrl) {
-    throw new Error('Presigned URL is not available in the response');
-  }
-
-  return presignedUrl;
+  return res.data.profileImageUrl;
 };
 
 export const uploadUrlToS3 = async (presignedUrl: string, file: File) => {
@@ -36,5 +29,6 @@ export const uploadUrlToS3 = async (presignedUrl: string, file: File) => {
     headers: {
       'Content-Type': file.type,
     },
+    withCredentials: true,
   });
 };
