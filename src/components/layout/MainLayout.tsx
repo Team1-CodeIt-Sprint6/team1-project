@@ -9,17 +9,19 @@ interface MainLayoutProps {
   children: ReactNode;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+function MainLayout({ children }: MainLayoutProps) {
   const router = useRouter();
   const isAuthPage =
     router.pathname === '/signin' || router.pathname === '/signup';
-  const needsSidebar = ![
-    '/',
-    '/experience-detail', //주소 이름 변경 필요
-    '/signin',
-    '/signup',
-  ].includes(router.pathname);
   const isMainPage = router.pathname === '/';
+  const isContentPage = /^\/experience-detail\/[^/]+$/.test(router.pathname);
+  // const isContentPage = router.pathname === '/experience-detail';
+  const isMyPages = !(isMainPage || isAuthPage || isContentPage);
+
+  const shouldRenderHeader = !isAuthPage;
+  const shouldRenderFooter = !isAuthPage;
+  const shouldRenderPadding = !isAuthPage && !isMainPage;
+  const shouldRenderSidebar = isMyPages;
 
   //로그인 정보, 유저 정보 받아오는 로직 필요
   const isLoggedIn = true;
@@ -35,7 +37,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {!isAuthPage && (
+      {shouldRenderHeader && (
         <>
           <div className="fixed left-0 right-0 top-0 z-10">
             <Header isLoggedIn={isLoggedIn} user={currentUser} />
@@ -44,33 +46,31 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         </>
       )}
 
-      {!isAuthPage && !isMainPage && (
+      {shouldRenderPadding ? (
         <>
           <div
             style={{
               height:
                 'min(72px, calc(24px + (72 - 24) * ((100vw - 1200px) / (1920 - 1200))))',
-              minHeight: '24px',
             }}
+            className="min-h-6"
           />
-          <div className="flex items-center justify-center">
-            <div className="mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full">
-              {needsSidebar && (
+          <div className="align-center">
+            <div className="layout-content-container">
+              {shouldRenderSidebar && (
                 <div className="mr-4 hidden pc:block tablet:block">
                   <LeftNavBar />
                 </div>
               )}
-              <main className={`flex-1`}>{children}</main>
+              <main className={`flex-1 bg-kv-gray-300`}>{children}</main>
             </div>
           </div>
         </>
-      )}
-
-      {(isAuthPage || isMainPage) && (
+      ) : (
         <main className={`flex-1`}>{children}</main>
       )}
 
-      {!isAuthPage && (
+      {shouldRenderFooter && (
         <>
           <div className="h-[120px]" />
           <Footer />
@@ -78,6 +78,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       )}
     </div>
   );
-};
+}
 
 export default MainLayout;

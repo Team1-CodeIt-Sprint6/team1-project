@@ -18,8 +18,8 @@ function Header({ isLoggedIn, user }: HeaderProps) {
   };
 
   return (
-    <header className="flex h-[70px] items-center justify-center border-b border-gray-300 bg-white p-4">
-      <div className="mx-5 flex h-[30px] w-full justify-between pc:w-[1200px] tablet:mx-6 tablet:w-full">
+    <header className="align-center h-[70px] border-b border-gray-300 bg-white p-4">
+      <div className="layout-content-container h-[30px] justify-between">
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
             <Image
