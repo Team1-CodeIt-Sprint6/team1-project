@@ -43,7 +43,7 @@ export default function UploadProfile({
   }, [profileImage]);
 
   useEffect(() => {
-    setProfileImage(initialProfile);
+    setProfileImage(initialProfile || DefaultProfile.src);
   }, [initialProfile]);
 
   return (

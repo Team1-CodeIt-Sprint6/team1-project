@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply text-kv-md font-kv-regular text-kv-black;
+    @apply text-kv-lg font-kv-regular text-kv-black;
   }
 }
 
@@ -71,5 +71,29 @@
 @layer utilities {
   .align-center {
     @apply flex items-center justify-center;
+  }
+}
+
+/* 프로필 스타일 */
+@layer components {
+  /* 저장하기 버튼 */
+  .save-btn {
+    @apply cursor-pointer rounded bg-kv-primary-blue px-8 py-3 font-kv-semibold text-white hover:bg-[#233CC1];
+  }
+
+  .profile-input-group {
+    @apply mb-8;
+  }
+
+  .profile-label {
+    @apply mb-4 block text-kv-2xl font-kv-bold;
+  }
+
+  .profile-input {
+    @apply h-14 w-full rounded border border-kv-primary-blue-light px-5 py-4 outline-none focus:border-kv-primary-blue focus:bg-slate-50;
+  }
+
+  .profile-input-error {
+    @apply border-kv-red focus:border-kv-red;
   }
 }
