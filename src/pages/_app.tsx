@@ -3,10 +3,18 @@ import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
+import localFont from 'next/font/local';
 import { useState } from 'react';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+
+const pretendard = localFont({
+  src: '../../public/static/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   // Next.js에서는 페이지를 이동하면 App 컴포넌트부터 새롭게 렌더링되기 때문에
@@ -26,9 +34,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <main className={`${pretendard.variable} font-pretendard`}>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </main>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
