@@ -14,7 +14,7 @@ export default function LeftNaviBar() {
   };
 
   return (
-    <div className="w-full max-w-[360px] rounded-3xl border border-kv-gray-300 p-6 shadow-lg">
+    <div className="w-full min-w-64 rounded-3xl border border-kv-gray-300 p-6 shadow-lg pc:min-w-96">
       {/* 프로필 이미지 컴포넌트 */}
       <EditProfileImage
         initialImage={profileImage}

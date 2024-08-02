@@ -5,7 +5,7 @@ interface UrlProps {
 }
 
 export const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIwLCJ0ZWFtSWQiOiI2LTEiLCJpYXQiOjE3MjI2MzA2MjgsImV4cCI6MTcyMjYzMjQyOCwiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.BzW4LHMfDDrN4Ouh76KuIa4WfkPdYLtB5KmTUGaY2I0';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIwLCJ0ZWFtSWQiOiI2LTEiLCJpYXQiOjE3MjI2MzQ5MzIsImV4cCI6MTcyMjYzNjczMiwiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.k6SD7uriKxewR1jNJQyztS-e-or9h0hzCJM3bAoFsxY';
 
 export const createPresignedUrl = async (file: File) => {
   const formData = new FormData();

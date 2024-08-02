@@ -9,7 +9,7 @@ export default function EditProfileForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
     trigger,
     reset,
@@ -130,7 +130,12 @@ export default function EditProfileForm() {
           <ErrorText>{errors.newPassword?.message}</ErrorText>
         ) : null}
       </div>
-      <input type="submit" value="저장하기" className="save-btn" />
+      <input
+        type="submit"
+        value="저장하기"
+        className="save-btn z-1 absolute right-0 top-0"
+        disabled={isSubmitting}
+      />
     </form>
   );
 }
