@@ -1,24 +1,51 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useToggle } from 'usehooks-ts';
+import * as yup from 'yup';
 
+import NoShowPasswordIcon from '@/assets/icons/icon_noshow_password.svg';
+import ShowPasswordIcon from '@/assets/icons/icon_show_password.svg';
 import Button from '@/components/common/Button';
 import ErrorText from '@/components/common/ErrorText';
 import Input from '@/components/common/Input';
 import Label from '@/components/common/Label';
+import useLogIn from '@/hooks/useLogin';
+import { LogInForm } from '@/types/post/loginTypes';
 
-interface LoginProps {
-  email: string;
-  password: string;
-}
-const onSubmit: SubmitHandler<LoginProps> = () => {};
-const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .trim()
+    .matches(
+      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
+      '잘못된 이메일입니다.',
+    )
+    .required('이메일을 입력해주세요'),
+  password: yup
+    .string()
+    .min(8, '8자 이상 입력해주세요')
+    .required('비밀번호를 입력해주세요'),
+});
 
 export default function LoginForm() {
   const {
     register,
-    setError,
     handleSubmit,
-    formState: { isSubmitting, errors, isValid },
-  } = useForm<LoginProps>({ mode: 'onChange' });
+    formState: { errors, isValid },
+  } = useForm<LogInForm>({ mode: 'onChange', resolver: yupResolver(schema) });
+  const [isShowPassword, toggle] = useToggle(true);
+  const router = useRouter();
+
+  const mutation = useLogIn();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    mutation.mutate(data, {
+      onSuccess: () => {
+        router.push('/'); // 로그인 성공 시 리다이렉트
+      },
+    });
+  };
 
   return (
     <form
@@ -27,46 +54,49 @@ export default function LoginForm() {
     >
       <div className="grid gap-6">
         <div className="grid gap-[10px]">
-          <Label htmlFor="email">이메일</Label>
-          <Input
-            type="text"
-            id="email"
-            placeholder="이메일을 입력해 주세요"
-            {...register('email', {
-              required: '잘못된 이메일입니다.',
-              pattern: {
-                value: EMAIL_REGEX,
-                message: '잘못된 이메일입니다.',
-              },
-            })}
-            validationCheck={!!errors.email}
-          />
-          {errors.email?.message && (
-            <ErrorText>{errors.email?.message}</ErrorText>
-          )}
+          <Label htmlFor="email" className="flex flex-col gap-3">
+            이메일
+            <Input
+              type="text"
+              id="email"
+              placeholder="이메일을 입력해 주세요"
+              {...register('email')}
+              validationCheck={!!errors.email}
+            />
+            {errors.email?.message && (
+              <ErrorText>{errors.email?.message}</ErrorText>
+            )}
+          </Label>
         </div>
         <div className="grid gap-[10px]">
-          <Label htmlFor="password">비밀번호</Label>
-          <Input
-            type="password"
-            id="password"
-            placeholder="비밀번호를 입력해 주세요"
-            {...register('password', {
-              required: '8자 이상 작성해 주세요',
-              minLength: {
-                value: 8,
-                message: '8자 이상 작성해 주세요',
-              },
-            })}
-            validationCheck={!!errors.password}
-          />
+          <Label htmlFor="password" className="relative flex flex-col gap-3">
+            비밀번호{' '}
+            <Input
+              type={isShowPassword ? 'text' : 'password'}
+              id="password"
+              placeholder="비밀번호를 입력해 주세요"
+              {...register('password')}
+              validationCheck={!!errors.password}
+            />
+            {isShowPassword ? (
+              <ShowPasswordIcon
+                onClick={toggle}
+                className="absolute right-2 top-[60px]"
+              />
+            ) : (
+              <NoShowPasswordIcon
+                onClick={toggle}
+                className="absolute right-2 top-[60px]"
+              />
+            )}
+          </Label>
           {errors.password && <ErrorText>{errors.password?.message}</ErrorText>}
         </div>
       </div>
       <Button
-        disabled={!isValid || isSubmitting}
+        disabled={!isValid || mutation.isPending}
         type="submit"
-        className={`${!isValid || isSubmitting ? 'bg-kv-gray-600' : 'bg-kv-primary-blue'}`}
+        className={`${!isValid || mutation.isPending ? 'bg-kv-gray-600 text-white' : 'bg-kv-primary-blue text-white'}`}
       >
         로그인 하기
       </Button>
