@@ -1,5 +1,5 @@
 import LeftNaviBar from '@/components/common/LeftNavBar';
-import EditProfile from '@/components/userProfile/EditProfile';
+import EditProfileForm from '@/components/userProfile/EditProfileForm';
 
 export default function ProfilePage() {
   return (
@@ -7,7 +7,7 @@ export default function ProfilePage() {
       <LeftNaviBar />
       <div>
         <h2 className="text-kv-3xl font-kv-semibold">내 정보</h2>
-        <EditProfile />
+        <EditProfileForm />
       </div>
     </>
   );

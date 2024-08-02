@@ -90,10 +90,14 @@
   }
 
   .profile-input {
-    @apply h-14 w-full rounded border border-kv-primary-blue-light px-5 py-4 outline-none focus:border-kv-primary-blue focus:bg-slate-50;
+    @apply h-14 w-full rounded border border-kv-primary-blue-light px-5 py-4 outline-none focus:border-kv-primary-blue;
   }
 
   .profile-input-error {
     @apply border-kv-red focus:border-kv-red;
+  }
+
+  .profile-input-readonly {
+    @apply cursor-not-allowed border-kv-primary-blue-light focus:border-kv-primary-blue-light;
   }
 }
