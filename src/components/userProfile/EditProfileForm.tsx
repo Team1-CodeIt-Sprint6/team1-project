@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import ErrorText from '@/components/common/ErrorText';
-import { getUserData } from '@/lib/api/getUserData';
-import { updateUserData } from '@/lib/api/updateUserData';
+import { getUserData } from '@/lib/apis/getUserData';
+import { updateUserData } from '@/lib/apis/updateUserData';
 
 export interface ProfileProps {
   email: string;
