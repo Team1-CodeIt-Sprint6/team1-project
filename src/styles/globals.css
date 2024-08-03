@@ -17,39 +17,46 @@
   }
 
   .btn-gray {
-    @apply align-center border-kv-gray-4b bg-kv-gray-100 hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
+    @apply border-kv-gray-4b bg-kv-gray-100 align-center hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
+  }
+
+  .btn-blue {
+    @apply hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active bg-kv-primary-blue text-white disabled:bg-kv-gray-600;
   }
 }
 
-@layer utilities {
-  .align-center {
-    @apply flex items-center justify-center;
+/* css for my-activity */
+@layer components {
+  .size-my-act-img {
+    @apply size-[167px] pc:size-[180px] tablet:size-[206px];
   }
 }
 
 /* date picker custom styles */
-.react-datepicker__header {
-  @apply !border-b-0 !bg-white !pb-0;
-}
+@layer components {
+  .react-datepicker__header {
+    @apply !border-b-0 !bg-white !pb-0;
+  }
 
-.react-datepicker {
-  @apply !border-kv-gray-600;
-}
+  .react-datepicker {
+    @apply !border-kv-gray-600;
+  }
 
-.react-datepicker__day--selected {
-  @apply !bg-transparent !text-inherit;
-}
+  .react-datepicker__day--selected {
+    @apply !bg-transparent !text-inherit;
+  }
 
-.react-datepicker__day:hover {
-  @apply !bg-inherit text-kv-red;
-}
+  .react-datepicker__day:hover {
+    @apply !bg-inherit text-kv-red;
+  }
 
-.react-datepicker__day--keyboard-selected {
-  @apply !animate-fadeIn !bg-inherit;
-}
+  .react-datepicker__day--keyboard-selected {
+    @apply !animate-fadeIn !bg-inherit;
+  }
 
-.react-datepicker__month {
-  @apply !pr-[10px];
+  .react-datepicker__month {
+    @apply !pr-[10px];
+  }
 }
 /* date picker styles */
 
@@ -64,3 +71,56 @@
   }
 }
 /* DayMarker styles */
+
+
+/* Layout styles */
+@layer components {
+  .layout-content-container{
+    @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  }
+  .footer-link-styles{
+    @apply font-sans text-base font-normal;
+  }
+  .layout-container{
+    @apply flex min-h-screen flex-col;
+  }
+  .layout-header-wrapper{
+    @apply fixed left-0 right-0 top-0 z-10;
+  }
+  .layout-header-spacer {
+    @apply h-[70px] w-full;
+  }
+  .layout-content-margin-top {
+    @apply min-h-6;
+  }
+  .layout-content-margin-bottom {
+    @apply h-[120px] w-full;
+  }
+}
+/* Layout styles */
+
+@layer utilities {
+  .align-center {
+    @apply flex items-center justify-center;
+  }
+}
+
+/* 모달 */
+@layer components {
+  .modal-container {
+    @apply pointer-events-auto relative flex flex-col rounded-lg bg-white shadow-lg;
+  }
+
+  .modal-content {
+    @apply flex flex-grow items-center justify-center px-6;
+  }
+
+  .modal-text {
+    @apply mb-[28px] overflow-hidden text-center font-kv-medium;
+  }
+
+  .modal-button-common {
+    @apply absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium;
+  }
+}
+
