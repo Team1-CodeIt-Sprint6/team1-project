@@ -21,7 +21,7 @@
   }
 
   .btn-blue {
-    @apply hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active bg-kv-primary-blue text-white disabled:bg-kv-gray-600;
+    @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
   }
 }
 
@@ -34,30 +34,30 @@
 
 /* date picker custom styles */
 @layer components {
-  .react-datepicker__header {
-    @apply !border-b-0 !bg-white !pb-0;
+  .custom-datepicker .react-datepicker__header {
+    @apply border-b-0 bg-white pb-0;
+  }
+  .custom-datepicker .react-datepicker {
+    @apply border-kv-gray-600;
   }
 
-  .react-datepicker {
-    @apply !border-kv-gray-600;
+  .custom-datepicker .react-datepicker__day--selected {
+    @apply bg-transparent text-inherit;
   }
 
-  .react-datepicker__day--selected {
-    @apply !bg-transparent !text-inherit;
+  .custom-datepicker .react-datepicker__day:hover {
+    @apply bg-inherit text-kv-red;
   }
 
-  .react-datepicker__day:hover {
-    @apply !bg-inherit text-kv-red;
+  .custom-datepicker .react-datepicker__day--keyboard-selected {
+    @apply animate-fadeIn bg-inherit;
   }
 
-  .react-datepicker__day--keyboard-selected {
-    @apply !animate-fadeIn !bg-inherit;
-  }
-
-  .react-datepicker__month {
-    @apply !pr-[10px];
+  .custom-datepicker .react-datepicker__month {
+    @apply pr-[10px];
   }
 }
+
 /* date picker styles */
 
 /* DayMarker styles */
@@ -72,19 +72,18 @@
 }
 /* DayMarker styles */
 
-
 /* Layout styles */
 @layer components {
-  .layout-content-container{
+  .layout-content-container {
     @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
-  .footer-link-styles{
+  .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
-  .layout-container{
+  .layout-container {
     @apply flex min-h-screen flex-col;
   }
-  .layout-header-wrapper{
+  .layout-header-wrapper {
     @apply fixed left-0 right-0 top-0 z-10;
   }
   .layout-header-spacer {
@@ -123,4 +122,3 @@
     @apply absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium;
   }
 }
-
