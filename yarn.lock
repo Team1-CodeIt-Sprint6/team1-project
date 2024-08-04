@@ -4463,6 +4463,11 @@ react-onclickoutside@^6.13.0:
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.13.1.tgz#1f5e0241c08784b6e65745d91aca0d700c548a89"
   integrity sha512-LdrrxK/Yh9zbBQdFbMTXPp3dTSN9B+9YJQucdDu3JNKRrbdU+H+/TVONJoWtOwy4II8Sqf1y/DTI6w/vGPYW0w==
 
+react-usehooks-ts@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/react-usehooks-ts/-/react-usehooks-ts-1.0.13.tgz#50a0fc3f8c5889b99f77187d5eed270a40ef32d0"
+  integrity sha512-CT7OjGDJ+QyhNFGCPOk2+13LM2er/7ze4ZlCZX1oZ1uA0EV5UV5awljwkJpdly0T3AIShJxz4pCCUMDBSVq54Q==
+
 react@^18:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
