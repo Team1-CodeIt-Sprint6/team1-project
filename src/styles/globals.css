@@ -21,7 +21,7 @@
   }
 
   .btn-blue {
-    @apply hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active bg-kv-primary-blue text-white disabled:bg-kv-gray-600;
+    @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
   }
 }
 
@@ -72,19 +72,18 @@
 }
 /* DayMarker styles */
 
-
 /* Layout styles */
 @layer components {
-  .layout-content-container{
+  .layout-content-container {
     @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
-  .footer-link-styles{
+  .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
-  .layout-container{
+  .layout-container {
     @apply flex min-h-screen flex-col;
   }
-  .layout-header-wrapper{
+  .layout-header-wrapper {
     @apply fixed left-0 right-0 top-0 z-10;
   }
   .layout-header-spacer {
@@ -124,3 +123,12 @@
   }
 }
 
+/* 케밥 */
+@layer components {
+  .kebab-menu {
+    @apply cursor-pointer py-4 text-center text-kv-2lg font-kv-medium hover:bg-kv-gray-200;
+  }
+  .kebal-first-menu {
+    @apply border-b border-kv-gray-300;
+  }
+}

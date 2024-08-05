@@ -1,24 +1,23 @@
+import CustomKebab from '@/components/activity/CustomKebab';
 import Location from '@/components/activity/Location';
 import { ReviewRating } from '@/components/activity/Review';
 import { ActivityItem } from '@/types/activityTypes';
 
-export default function Activity() {
+export default function Activity({ activityId }: { activityId: number }) {
   return (
-    <>
-      <div className="flex items-center justify-between">
-        <div>
-          <span>{activityData.category}</span>
-          <h2 className="mb-4 mt-2 text-kv-3xl font-kv-bold mobile:text-kv-2xl">
-            {activityData.title}
-          </h2>
-          <div className="flex items-center gap-3">
-            <ReviewRating activityData={activityData} />
-            <Location activityData={activityData} />
-          </div>
+    <div className="flex items-center justify-between">
+      <div>
+        <span>{activityData.category}</span>
+        <h2 className="mb-4 mt-2 text-kv-3xl font-kv-bold mobile:text-kv-2xl">
+          {activityData.title}
+        </h2>
+        <div className="flex items-center gap-3">
+          <ReviewRating activityData={activityData} />
+          <Location activityData={activityData} />
         </div>
-        <div>{/* 케밥 메뉴 */}</div>
       </div>
-    </>
+      <CustomKebab activityId={activityId} />
+    </div>
   );
 }
 
