@@ -4,20 +4,20 @@ import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
 
 interface Step2MobileCardProps {
   onClick: CardEventHandlerType;
-  people: number;
+  headCount: number;
 }
 
 export default function Step2MobileCard({
   onClick,
-  people,
+  headCount,
 }: Step2MobileCardProps) {
   return (
     <>
       <ReservationHeader
-        title="people"
+        title="headCount"
         onCloseClick={onClick.handleCloseClick}
       />
-      <ParticipantCounter onClick={onClick} people={people} />
+      <ParticipantCounter onClick={onClick} headCount={headCount} />
     </>
   );
 }

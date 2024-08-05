@@ -2,13 +2,20 @@ import ReservationButton from '@/components/ActivityPage/ReservationCard/Reserva
 import ReservationHeader from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationHeader';
 import TimeSelector from '@/components/ActivityPage/ReservationCard/ReservationCommon/TimeSelector';
 import DatePicker from '@/components/common/DatePicker/DatePicker';
-import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
+import {
+  CardEventHandlerType,
+  ReservationStateType,
+} from '@/types/activityDetailPageTypes';
 
 interface TabletStep2CardProps {
   onClick: CardEventHandlerType;
+  reservationState: ReservationStateType;
 }
 
-export default function Step2TabletCard({ onClick }: TabletStep2CardProps) {
+export default function Step2TabletCard({
+  onClick,
+  reservationState,
+}: TabletStep2CardProps) {
   return (
     <div className="w-[480px] rounded-xl border-[1px] shadow-md">
       <ReservationHeader
@@ -26,7 +33,7 @@ export default function Step2TabletCard({ onClick }: TabletStep2CardProps) {
         />
       </div>
       <div className="mx-auto w-[432px]">
-        <TimeSelector onClick={onClick} />
+        <TimeSelector onClick={onClick} reservationState={reservationState} />
       </div>
       <ReservationButton
         className="mx-auto block w-[432px]"

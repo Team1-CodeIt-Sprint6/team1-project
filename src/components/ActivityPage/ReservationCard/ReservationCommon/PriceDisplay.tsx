@@ -5,6 +5,7 @@ import { getFormattedAmount } from '@/lib/utils/getFormattedAmount';
 
 interface PriceDisplayProps {
   price: number;
+  headCount: number;
   containerClassName?: string;
   priceClassName?: string;
   unitClassName?: string;
@@ -12,6 +13,7 @@ interface PriceDisplayProps {
 
 export default function PriceDisplay({
   price,
+  headCount,
   containerClassName = '',
   priceClassName = '',
   unitClassName = '',
@@ -31,7 +33,7 @@ export default function PriceDisplay({
         {formattedPrice}
       </span>
       <span className={classNames('unit-display-price-default', unitClassName)}>
-        / 인
+        {headCount > 1 ? `/ 총 ${headCount}인` : '/ 인'}
       </span>
     </div>
   );

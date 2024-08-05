@@ -2,12 +2,13 @@ import classNames from 'classnames';
 
 import MinusIcon from '@/assets/icons/icon_decrease.svg';
 import PlusIcon from '@/assets/icons/icon_increase.svg';
+import { RESERVATION_PARTICIPANT_COUNTER_PLACEHOLDER } from '@/constants/reservationCardConstants';
 import useResponsive from '@/hooks/useResponsive';
 import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
 
 interface ParticipantCounterProps {
-  onClick?: CardEventHandlerType;
-  people: number;
+  onClick: CardEventHandlerType;
+  headCount: number;
   containerClassName?: string;
   titleClassName?: string;
   counterClassName?: string;
@@ -17,7 +18,7 @@ interface ParticipantCounterProps {
 
 function ParticipantCounter({
   onClick,
-  people,
+  headCount,
   containerClassName = '',
   titleClassName = '',
   counterClassName = '',
@@ -39,7 +40,9 @@ function ParticipantCounter({
           titleClassName,
         )}
       >
-        {isMobile ? '예약할 인원을 선택해주세요.' : '참여 인원 수'}
+        {isMobile
+          ? RESERVATION_PARTICIPANT_COUNTER_PLACEHOLDER.mobile
+          : RESERVATION_PARTICIPANT_COUNTER_PLACEHOLDER.noMobile}
       </p>
       <div
         className={classNames('counter-participant-default', counterClassName)}
@@ -49,7 +52,7 @@ function ParticipantCounter({
             'button-counter-participant-default',
             buttonClassName,
           )}
-          onClick={() => onClick?.handlePeopleChange(people - 1)}
+          onClick={() => onClick.handleHeadCountChange(headCount - 1)}
         >
           <MinusIcon
             className={classNames(
@@ -64,14 +67,14 @@ function ParticipantCounter({
             buttonTextClassName,
           )}
         >
-          {people}
+          {headCount}
         </span>
         <div
           className={classNames(
             'button-counter-participant-default',
             buttonClassName,
           )}
-          onClick={() => onClick?.handlePeopleChange(people + 1)}
+          onClick={() => onClick.handleHeadCountChange(headCount + 1)}
         >
           <PlusIcon
             className={classNames(

@@ -1,41 +1,58 @@
-// TimeSelector.tsx
+import { useState } from 'react';
+
 import Button from '@/components/common/Button';
-import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
+import { RESERVATION_TIMESELECTOR_PLACEHOLDER } from '@/constants/reservationCardConstants';
+import {
+  CardEventHandlerType,
+  ReservationStateType,
+} from '@/types/activityDetailPageTypes';
 
 interface TimeSelectorProps {
-  onClick?: CardEventHandlerType;
+  onClick: CardEventHandlerType;
+  reservationState: ReservationStateType;
 }
 
-function TimeSelector({ onClick }: TimeSelectorProps) {
-  const tmpTimeSlots = [
-    { startTime: '14:00', endTime: '15:00', isAvailable: true },
-    { startTime: '15:00', endTime: '16:00', isAvailable: false },
-  ];
+function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
+  const [selectedId, setSelectedId] = useState(0);
+  const { date, schedules } = reservationState;
+
+  const filteredSchedules = schedules.filter(
+    (schedule) => schedule.date === date,
+  );
+
+  const handleTimeClick = (startTime: string, endTime: string) => {
+    onClick.handleTimeChange(startTime, endTime);
+  };
 
   return (
     <div className="w-[327px]">
-      <p className="text-kv-2lg font-kv-bold">예약 가능한 시간</p>
-      {/* <p className="mt-[24px] text-center text-kv-lg font-kv-medium">
-        {selectedDate
-          ? `${selectedDate} 예약 가능 시간`
-          : '날짜를 선택해주세요.'}
-      </p> */}
-      <div className="mt-[14px] flex flex-wrap gap-3">
-        {tmpTimeSlots.map(({ startTime, endTime, isAvailable }) => (
-          <Button
-            key={`${startTime}-${endTime}`}
-            className={`h-[46px] w-[117px] ${
-              isAvailable
-                ? 'bg-kv-primary-blue text-white'
-                : 'border-[2px] border-kv-primary-blue text-kv-primary-blue'
-            }`}
-            // onClick={() => onTimeSlotSelect(startTime, endTime)}
-            disabled={!isAvailable}
-          >
-            {`${startTime}~${endTime}`}
-          </Button>
-        ))}
-      </div>
+      <p className="text-kv-2lg font-kv-bold">
+        {RESERVATION_TIMESELECTOR_PLACEHOLDER.title}
+      </p>
+      {date === '' ? (
+        <p className="mt-[24px] text-center text-kv-lg font-kv-medium">
+          {RESERVATION_TIMESELECTOR_PLACEHOLDER.noDate}
+        </p>
+      ) : (
+        <div className="mt-[14px] flex flex-wrap gap-3">
+          {filteredSchedules.map(({ id, startTime, endTime }) => (
+            <Button
+              key={id}
+              className={`h-[46px] w-[117px] ${
+                selectedId === id
+                  ? 'bg-kv-primary-blue text-white'
+                  : 'border-[2px] border-kv-primary-blue text-kv-primary-blue'
+              }`}
+              onClick={() => {
+                handleTimeClick(startTime, endTime);
+                setSelectedId(id);
+              }}
+            >
+              {`${startTime}~${endTime}`}
+            </Button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

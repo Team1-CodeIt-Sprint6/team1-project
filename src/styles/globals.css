@@ -23,6 +23,10 @@
   .btn-blue {
     @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
   }
+
+  .base-button-default {
+    @apply rounded-md py-[11px] text-kv-lg font-kv-bold;
+  }
 }
 
 /* css for my-activity */

@@ -1,38 +1,46 @@
 import ContentTitle from '@/components/ActivityPage/ReservationCard/ReservationCommon/ContentTitle';
+import DateTimeSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/DateTimeSummary';
 import ParticipantCounter from '@/components/ActivityPage/ReservationCard/ReservationCommon/ParticipantCounter';
 import PriceDisplay from '@/components/ActivityPage/ReservationCard/ReservationCommon/PriceDisplay';
 import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
 import TotalSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/TotalSummary';
-import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
+import { isReservationValid } from '@/lib/utils/isReservationValid';
+import {
+  CardEventHandlerType,
+  ReservationStateType,
+} from '@/types/activityDetailPageTypes';
 
 interface TabletStep1CardProps {
   onClick: CardEventHandlerType;
-  people: number;
-  time: string;
-  date: string;
-  price: number;
+  reservationState: ReservationStateType;
 }
 
 export default function Step3TabletCard({
   onClick,
-  people,
-  time,
-  date,
-  price,
+  reservationState,
 }: TabletStep1CardProps) {
   return (
     <div className="w-[251px] rounded-xl border-[1px] shadow-md">
-      <PriceDisplay price={price} />
+      <PriceDisplay
+        price={reservationState.price}
+        headCount={reservationState.headCount}
+      />
+      <div className="divider" />
       <div className="pl-[24px]">
         <ContentTitle className="mb-0" />
-        <p className="text-kv-lg font-kv-semibold text-kv-primary-blue">
-          {date} {time}
-        </p>
+        <DateTimeSummary
+          date={reservationState.date}
+          startTime={reservationState.startTime}
+          endTime={reservationState.endTime}
+          onClick={onClick.stepInit}
+          className="text-kv-lg font-kv-semibold text-kv-primary-blue"
+        />
       </div>
       <div className="pl-[24px]">
         <ParticipantCounter
           buttonTextClassName="text-kv-black"
-          people={people}
+          headCount={reservationState.headCount}
+          onClick={onClick}
         />
       </div>
       <ReservationButton
@@ -40,7 +48,7 @@ export default function Step3TabletCard({
         className="mx-auto my-[24px] block w-[203px] rounded-[4px] bg-kv-primary-blue"
       />
       <TotalSummary
-        totalAmount={10000}
+        totalAmount={reservationState.price * reservationState.headCount}
         containerClassName="px-[24px] py-[16px]"
       />
     </div>
