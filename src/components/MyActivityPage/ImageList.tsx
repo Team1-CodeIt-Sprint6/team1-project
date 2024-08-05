@@ -15,7 +15,7 @@ export default function ImageList({
   onDeleteImage,
 }: ImageListProps) {
   return (
-    <div className="flex w-full flex-wrap gap-2 pc:gap-6 tablet:gap-4">
+    <ul className="flex w-full flex-wrap gap-2 pc:gap-6 tablet:gap-4">
       <ImageInput
         disabled={imageFiles.length >= maxLength}
         onChange={onAddImage}
@@ -23,6 +23,6 @@ export default function ImageList({
       {imageFiles.map((file) => (
         <ImageCard image={file} onClickDelete={onDeleteImage} />
       ))}
-    </div>
+    </ul>
   );
 }
