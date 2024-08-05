@@ -1,17 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useToggle } from 'usehooks-ts';
 import * as yup from 'yup';
 
-import NoShowPasswordIcon from '@/assets/icons/icon_noshow_password.svg';
-import ShowPasswordIcon from '@/assets/icons/icon_show_password.svg';
 import Button from '@/components/common/Button';
 import ErrorText from '@/components/common/ErrorText';
 import Input from '@/components/common/Input';
 import Label from '@/components/common/Label';
 import useLogIn from '@/hooks/useLogin';
 import { LogInForm } from '@/types/post/loginTypes';
+
+import PasswordInput from './PasswordInput';
 
 const schema = yup.object().shape({
   email: yup
@@ -34,7 +33,6 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<LogInForm>({ mode: 'onChange', resolver: yupResolver(schema) });
-  const [isShowPassword, toggle] = useToggle(true);
   const router = useRouter();
 
   const mutation = useLogIn();
@@ -70,25 +68,13 @@ export default function LoginForm() {
         </div>
         <div className="grid gap-[10px]">
           <Label htmlFor="password" className="relative flex flex-col gap-3">
-            비밀번호{' '}
-            <Input
-              type={isShowPassword ? 'text' : 'password'}
+            비밀번호
+            <PasswordInput
               id="password"
               placeholder="비밀번호를 입력해 주세요"
               {...register('password')}
               validationCheck={!!errors.password}
             />
-            {isShowPassword ? (
-              <ShowPasswordIcon
-                onClick={toggle}
-                className="absolute right-2 top-[60px]"
-              />
-            ) : (
-              <NoShowPasswordIcon
-                onClick={toggle}
-                className="absolute right-2 top-[60px]"
-              />
-            )}
           </Label>
           {errors.password && <ErrorText>{errors.password?.message}</ErrorText>}
         </div>
