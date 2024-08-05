@@ -1,25 +1,24 @@
 import Image from 'next/image';
-import { ChangeEvent, RefObject } from 'react';
+import { ChangeEvent, useRef } from 'react';
 
 interface ImageInputProps {
   name: string;
-  inputRef: RefObject<HTMLInputElement>;
   onChange: (f: File) => void;
 }
 
 /* NOTE: 이미지 인풋을 입력받는 컴포넌트
  * onChange: 실제 폼에 입력 변화를 반영하기 위한 함수
  */
-export default function ImageInput({
-  name,
-  inputRef,
-  onChange,
-}: ImageInputProps) {
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+export default function ImageInput({ name, onChange }: ImageInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    if (files === null || !files[0]) return;
-    onChange(files[0]); // NOTE: 실제 폼 반영
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+    onChange(file); // 실제 폼 반영
+    const inputNode = inputRef.current as HTMLInputElement;
+    inputNode.value = ''; // input 비우기
   };
 
   return (
