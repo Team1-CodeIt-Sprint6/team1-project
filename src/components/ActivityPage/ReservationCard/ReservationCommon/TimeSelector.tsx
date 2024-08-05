@@ -1,17 +1,12 @@
-// AvailableTimeSlots.tsx
+// TimeSelector.tsx
 import Button from '@/components/common/Button';
+import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
 
-interface AvailableTimeSlotsProps {
-  selectedDate?: string | null;
-  timeSlots?: { startTime: string; endTime: string; isAvailable: boolean }[];
-  onTimeSlotSelect?: (startTime: string, endTime: string) => void;
+interface TimeSelectorProps {
+  onClick?: CardEventHandlerType;
 }
 
-function AvailableTimeSlots({
-  selectedDate,
-  timeSlots,
-  onTimeSlotSelect,
-}: AvailableTimeSlotsProps) {
+function TimeSelector({ onClick }: TimeSelectorProps) {
   const tmpTimeSlots = [
     { startTime: '14:00', endTime: '15:00', isAvailable: true },
     { startTime: '15:00', endTime: '16:00', isAvailable: false },
@@ -29,7 +24,7 @@ function AvailableTimeSlots({
         {tmpTimeSlots.map(({ startTime, endTime, isAvailable }) => (
           <Button
             key={`${startTime}-${endTime}`}
-            className={`mb-[16px] h-[46px] w-[117px] ${
+            className={`h-[46px] w-[117px] ${
               isAvailable
                 ? 'bg-kv-primary-blue text-white'
                 : 'border-[2px] border-kv-primary-blue text-kv-primary-blue'
@@ -45,4 +40,4 @@ function AvailableTimeSlots({
   );
 }
 
-export default AvailableTimeSlots;
+export default TimeSelector;

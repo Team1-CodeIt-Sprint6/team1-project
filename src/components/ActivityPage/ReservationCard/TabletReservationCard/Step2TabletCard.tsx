@@ -1,0 +1,37 @@
+import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
+import ReservationHeader from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationHeader';
+import TimeSelector from '@/components/ActivityPage/ReservationCard/ReservationCommon/TimeSelector';
+import DatePicker from '@/components/common/DatePicker/DatePicker';
+import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
+
+interface TabletStep2CardProps {
+  onClick: CardEventHandlerType;
+}
+
+export default function Step2TabletCard({ onClick }: TabletStep2CardProps) {
+  return (
+    <div className="w-[480px] rounded-xl border-[1px] shadow-md">
+      <ReservationHeader
+        title="date"
+        onCloseClick={onClick.handleCloseClick}
+        containerClassName="w-[432px] mt-[28px]"
+      />
+      <div className="mb-[24px] align-center">
+        <DatePicker
+          onClick={(date) => {
+            onClick.handleCalendarClick(date);
+          }}
+          variant="inline"
+          className="text-kv-md font-kv-semibold"
+        />
+      </div>
+      <div className="mx-auto w-[432px]">
+        <TimeSelector onClick={onClick} />
+      </div>
+      <ReservationButton
+        className="mx-auto block w-[432px]"
+        onClick={onClick.handleNextStepClick}
+      />
+    </div>
+  );
+}
