@@ -1,14 +1,29 @@
+import Location from '@/components/activity/Location';
+import { ReviewRating } from '@/components/activity/Review';
+import { ActivityItem } from '@/types/activityTypes';
+
 export default function Activity() {
   return (
     <>
-      <span>{item.category}</span>
-      <h2>{item.title}</h2>
+      <div className="flex items-center justify-between">
+        <div>
+          <span>{activityData.category}</span>
+          <h2 className="mb-4 mt-2 text-kv-3xl font-kv-bold mobile:text-kv-2xl">
+            {activityData.title}
+          </h2>
+          <div className="flex items-center gap-3">
+            <ReviewRating activityData={activityData} />
+            <Location activityData={activityData} />
+          </div>
+        </div>
+        <div>{/* 케밥 메뉴 */}</div>
+      </div>
     </>
   );
 }
 
 // 체험 상세 데이터
-const item = {
+const activityData: ActivityItem = {
   id: 7,
   userId: 21,
   title: '함께 배우면 즐거운 스트릿댄스',
