@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { getCookie } from 'cookies-next';
 
 import KebabContainer from '@/components/common/Kebab/KebabContainer';
 import KebabDelete from '@/components/common/Kebab/KebabDelete';
@@ -6,7 +7,11 @@ import KebabLink from '@/components/common/Kebab/KebabLink';
 import instance from '@/lib/apis/axios';
 
 const deleteActivity = async (activityId: number) => {
-  await instance.delete(`/my-activities/${activityId}`);
+  await instance.delete(`/activities/${activityId}`, {
+    headers: {
+      Authorization: `Bearer ${getCookie('accessToken')}`,
+    },
+  });
 };
 
 export default function CustomKebab({ activityId }: { activityId: number }) {

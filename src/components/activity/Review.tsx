@@ -1,8 +1,8 @@
 import StartIcon from '@/assets/icons/icon_star.svg';
-import { ActivityItem } from '@/types/activityTypes';
+import { ActivityResponse } from '@/types/activityTypes';
 
 interface ReviewProps {
-  activityData: ActivityItem;
+  activityData: ActivityResponse;
   className?: string;
 }
 

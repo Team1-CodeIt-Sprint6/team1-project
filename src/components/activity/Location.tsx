@@ -1,8 +1,8 @@
 import LocationIcon from '@/assets/icons/icon_location.svg';
-import { ActivityItem } from '@/types/activityTypes';
+import { ActivityResponse } from '@/types/activityTypes';
 
 interface LocationProps {
-  activityData: ActivityItem;
+  activityData: ActivityResponse;
   className?: string;
 }
 

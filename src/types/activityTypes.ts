@@ -1,4 +1,4 @@
-export interface ActivityItem {
+export interface ActivityResponse {
   id: number;
   userId: number;
   title: string;
