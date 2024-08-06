@@ -5,7 +5,7 @@ import React from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
 import useFetchData from '@/hooks/useFetchData';
-import { getUserMe } from '@/lib/apis/userApis';
+import { getUserData } from '@/lib/apis/userApis';
 import { User } from '@/types/userTypes';
 
 function Header() {
@@ -16,7 +16,7 @@ function Header() {
     error,
     isLoading,
     isSuccess,
-  } = useFetchData<User>(['userInfo'], getUserMe, {
+  } = useFetchData<User>(['userInfo'], getUserData, {
     enabled: !!accessToken,
   });
   const isLoggedIn = isSuccess;

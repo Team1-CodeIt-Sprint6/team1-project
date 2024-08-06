@@ -2,7 +2,7 @@ import { User } from '@/types/userTypes';
 
 import instance from './axios';
 
-export const getUserMe = async (): Promise<{ data: User }> => {
+export const getUserData = async (): Promise<{ data: User }> => {
   const URL = '/users/me';
 
   try {
