@@ -16,7 +16,7 @@ export default forwardRef(function PasswordInput(
   { validationCheck, ...rest }: PasswordInputProps,
   ref: React.LegacyRef<HTMLInputElement>,
 ) {
-  const [isShowPassword, toggle] = useToggle(true);
+  const [isShowPassword, toggle] = useToggle(false);
   return (
     <>
       <input

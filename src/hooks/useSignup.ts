@@ -1,14 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { setCookie } from 'cookies-next';
 
-import { postLogin } from '@/lib/apis/postApis';
-import { LogInForm, LogInResponse } from '@/types/AuthTypes';
+import { postSignup } from '@/lib/apis/postApis';
+import { SignUpForm, SignUpResponse } from '@/types/AuthTypes';
 
 // NOTE: 로그인 성공시 쿠키에 토큰 저장, 실패시 에러 출력하는 훅
-const useLogIn = () => {
-  return useMutation<LogInResponse, unknown, LogInForm, unknown>({
-    mutationFn: postLogin,
+const useSignup = () => {
+  return useMutation<SignUpResponse, unknown, SignUpForm, unknown>({
+    mutationFn: postSignup,
     onError: (error: unknown) => {
       if (error instanceof AxiosError) {
         console.error(error.response?.data.message);
@@ -16,10 +15,8 @@ const useLogIn = () => {
         console.error('알 수 없는 오류가 발생했습니다.');
       }
     },
-    onSuccess: (data) => {
-      setCookie('accessToken', data.accessToken);
-    },
+    onSuccess: () => {},
   });
 };
 
-export default useLogIn;
+export default useSignup;
