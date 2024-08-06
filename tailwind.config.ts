@@ -39,7 +39,9 @@ const config: Config = {
           700: '#6B7280',
           800: '#374151',
           900: '#1F2937',
-          '4b': '#4b4b4b',
+          '4b': '#4B4B4B',
+          79: '#79747E',
+          a1: '#A1A1A1',
         },
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',

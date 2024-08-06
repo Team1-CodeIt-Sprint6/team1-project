@@ -25,39 +25,47 @@
   }
 }
 
-/* css for my-activity */
+/* my-activity page styles */
 @layer components {
   .size-my-act-img {
     @apply size-[167px] pc:size-[180px] tablet:size-[206px];
+  }
+
+  .h2-my-act {
+    @apply mb-3 text-kv-xl font-kv-bold pc:mb-4 pc:text-kv-2xl tablet:mb-4 tablet:text-kv-2xl;
+  }
+
+  .input-my-act {
+    @apply rounded border border-kv-gray-79 bg-white p-2.5 text-kv-md pc:px-4 pc:py-[15px] pc:text-kv-lg tablet:px-4 tablet:py-[15px] tablet:text-kv-lg;
   }
 }
 
 /* date picker custom styles */
 @layer components {
-  .react-datepicker__header {
-    @apply !border-b-0 !bg-white !pb-0;
+  .custom-datepicker .react-datepicker__header {
+    @apply border-b-0 bg-white pb-0;
+  }
+  .custom-datepicker .react-datepicker {
+    @apply border-kv-gray-600;
   }
 
-  .react-datepicker {
-    @apply !border-kv-gray-600;
+  .custom-datepicker .react-datepicker__day--selected {
+    @apply bg-transparent text-inherit;
   }
 
-  .react-datepicker__day--selected {
-    @apply !bg-transparent !text-inherit;
+  .custom-datepicker .react-datepicker__day:hover {
+    @apply bg-inherit text-kv-red;
   }
 
-  .react-datepicker__day:hover {
-    @apply !bg-inherit text-kv-red;
+  .custom-datepicker .react-datepicker__day--keyboard-selected {
+    @apply animate-fadeIn bg-inherit;
   }
 
-  .react-datepicker__day--keyboard-selected {
-    @apply !animate-fadeIn !bg-inherit;
-  }
-
-  .react-datepicker__month {
-    @apply !pr-[10px];
+  .custom-datepicker .react-datepicker__month {
+    @apply pr-[10px];
   }
 }
+
 /* date picker styles */
 
 /* DayMarker styles */
@@ -74,11 +82,14 @@
 
 /* Layout styles */
 @layer components {
-  .layout-content-container {
-    @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
-  }
   .footer-link-styles {
     @apply font-sans text-base font-normal;
+  }
+  .header-link-styles {
+    @apply cursor-pointer font-kv-medium text-kv-black kv-text-md hover:text-kv-gray-600 active:text-kv-gray-800;
+  }
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
   .layout-container {
     @apply flex min-h-screen flex-col;
@@ -119,6 +130,25 @@
 
   .modal-button-common {
     @apply absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium;
+  }
+}
+
+/* dropdown styles */
+@layer components {
+  .value-dropdown-basic {
+    @apply bg-white p-2.5 hover:bg-kv-gray-100 pc:px-4 pc:py-[15px] tablet:px-4 tablet:py-[15px];
+  }
+
+  .value-dropdown-button {
+    @apply value-dropdown-basic rounded border border-kv-gray-79 focus:bg-kv-gray-200;
+  }
+
+  .pos-value-dropdown-menus {
+    @apply top-12 max-h-[220px] overflow-y-scroll border border-kv-gray-300 pc:top-16 pc:max-h-[300px] tablet:top-16;
+  }
+
+  .dropdown-menu {
+    @apply value-dropdown-basic border-kv-gray-300 active:bg-kv-gray-200;
   }
 }
 

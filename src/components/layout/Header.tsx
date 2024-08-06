@@ -1,18 +1,44 @@
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
+import useFetchData from '@/hooks/useFetchData';
+import { getUserData } from '@/lib/apis/userApis';
+import { User } from '@/types/userTypes';
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-  user?: {
-    nickname: string;
-    profileImageUrl: string | null;
-  };
-}
+function Header() {
+  const accessToken = getCookie('accessToken');
+  const {
+    data: user,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
+  } = useFetchData<User>(['userInfo', accessToken], getUserData, {
+    enabled: !!accessToken,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 30 * 60 * 1000,
+  });
+  const isLoggedIn = isSuccess;
 
-function Header({ isLoggedIn, user }: HeaderProps) {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error loading user data: {error.message}</div>;
+  }
+
   const handleNotificationClick = () => {
     //알림 컴포넌트 나오는 로직
   };
@@ -53,10 +79,10 @@ function Header({ isLoggedIn, user }: HeaderProps) {
         ) : (
           <div className="flex w-[111px] justify-between">
             <Link href="/login">
-              <span className={`${LINK_STYLES}`}>로그인</span>
+              <span className="header-link-styles">로그인</span>
             </Link>
             <Link href="/signup">
-              <span className={`${LINK_STYLES}`}>회원가입</span>
+              <span className="header-link-styles">회원가입</span>
             </Link>
           </div>
         )}
@@ -66,6 +92,3 @@ function Header({ isLoggedIn, user }: HeaderProps) {
 }
 
 export default Header;
-
-const LINK_STYLES =
-  'cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800 cursor:pointer';
