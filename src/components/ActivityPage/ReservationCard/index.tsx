@@ -40,6 +40,14 @@ export default function ReservationCard() {
     }
   }, [activityData]);
 
+  useEffect(() => {
+    setReservationState((prevState) => ({
+      ...prevState,
+      startTime: '',
+      endTime: '',
+    }));
+  }, [reservationState.date]);
+
   if (isLoading) return null;
 
   return (
