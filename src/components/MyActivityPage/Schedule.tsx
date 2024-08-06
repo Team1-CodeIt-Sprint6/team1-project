@@ -14,7 +14,7 @@ interface DateProps {
  */
 export default function Schedule({ schedule, idx, onClickDelete }: DateProps) {
   return (
-    <div className="pc-gap-[5px] flex h-11 gap-1 pc:h-14 pc:gap-5 tablet:h-14 tablet:gap-2">
+    <div className="flex h-11 gap-1 pc:h-14 pc:gap-5 tablet:h-14 tablet:gap-2">
       {/* 날짜 */}
       <div className="input-my-act w-[130px] pc:w-[380px] tablet:w-[150px]">
         {formatFromDashToSlash(schedule.date)}
