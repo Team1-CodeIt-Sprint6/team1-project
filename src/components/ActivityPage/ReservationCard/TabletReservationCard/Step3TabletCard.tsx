@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import ContentTitle from '@/components/ActivityPage/ReservationCard/ReservationCommon/ContentTitle';
 import DateTimeSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/DateTimeSummary';
 import ParticipantCounter from '@/components/ActivityPage/ReservationCard/ReservationCommon/ParticipantCounter';
@@ -20,9 +22,15 @@ export default function Step3TabletCard({
   onClick,
   reservationState,
 }: TabletStep1CardProps) {
-  const { submitReservation } = useReservation();
-  const { isOpen, closeModal, message, modalType } = useModal();
+  const { submitReservation, isSuccess } = useReservation();
+  const { isOpen, openModal, closeModal, message, modalType } = useModal();
   const isValidate = isReservationValid(reservationState);
+
+  useEffect(() => {
+    if (isSuccess) {
+      openModal('alert', `예약이 성공적으로 완료되었습니다.`);
+    }
+  }, [isSuccess, openModal]);
 
   return (
     <div className="w-[251px] rounded-xl border-[1px] shadow-md">

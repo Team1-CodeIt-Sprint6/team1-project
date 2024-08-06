@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import DateTimeSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/DateTimeSummary';
 import PriceDisplay from '@/components/ActivityPage/ReservationCard/ReservationCommon/PriceDisplay';
 import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
@@ -20,8 +22,14 @@ function ReservationFooterMenu({
   reservationState,
 }: ReservationFooterMenuProps) {
   const isValidate = isReservationValid(reservationState);
-  const { submitReservation } = useReservation();
-  const { closeModal, isOpen, modalType, message } = useModal();
+  const { submitReservation, isSuccess } = useReservation();
+  const { openModal, closeModal, isOpen, modalType, message } = useModal();
+
+  useEffect(() => {
+    if (isSuccess) {
+      openModal('alert', `예약이 성공적으로 완료되었습니다.`);
+    }
+  }, [isSuccess, openModal]);
 
   return (
     <div className="fixed bottom-0 left-0 h-[83px] w-full border-[1px] border-kv-gray-300 bg-white">
