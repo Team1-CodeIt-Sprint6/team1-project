@@ -4,6 +4,7 @@ import CustomKebab from '@/components/activity/CustomKebab';
 import Location from '@/components/activity/Location';
 import { ReviewRating } from '@/components/activity/Review';
 import { useActivity } from '@/hooks/useActivity';
+import { useUserData } from '@/lib/apis/getUserData';
 
 export default function ActivityPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function ActivityPage() {
   }
 
   const { data: activityData, isLoading } = useActivity(activityId);
+  const { data: userData } = useUserData();
 
   if (isLoading) return <div>로딩중</div>;
   if (!activityData) return <div>존재하지 않는 체험입니다.</div>;
@@ -31,7 +33,9 @@ export default function ActivityPage() {
           <Location activityData={activityData} />
         </div>
       </div>
-      <CustomKebab activityId={activityId} />
+      {activityData.userId === userData?.id && (
+        <CustomKebab activityId={activityId} />
+      )}
     </div>
   );
 }
