@@ -6,8 +6,8 @@ interface ValueDropdownProps {
   placeholder: string;
   availableValues: string[];
   isOpen: boolean;
-  dropdownRef: MutableRefObject<HTMLDivElement | null>;
   onClickButton: MouseEventHandler<HTMLButtonElement>;
+  onBlurButton: () => void;
   onClickMenu: (value: string) => MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -23,18 +23,19 @@ export default function ValueDropdown({
   placeholder,
   availableValues,
   isOpen,
-  dropdownRef,
   onClickButton,
+  onBlurButton,
   onClickMenu,
 }: ValueDropdownProps) {
   return (
-    <div className="relative w-full" ref={dropdownRef}>
+    <div className="relative w-full">
       {/* 드롭다운 버튼 */}
       <button
         // NOTE: 다른 곳에서 사용시 value-dropdown-button 부분만 필요에 따라 바꾸면 될 것 같습니다.
         className={`value-dropdown-button flex w-full items-center justify-between ${value ? '' : 'text-kv-gray-a1'} `}
         type="button"
         onClick={onClickButton}
+        onBlur={onBlurButton}
       >
         <span>{value || placeholder}</span>
         {/* NOTE: 다른 곳에서 사용시 아이콘 부분은 바꿔야 할 것 같습니다. */}
@@ -59,7 +60,7 @@ export default function ValueDropdown({
               <button
                 key={value}
                 className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'}`}
-                onClick={(e) => onClickMenu(value)(e)}
+                onMouseDown={(e) => onClickMenu(value)(e)}
               >
                 {value}
               </button>
