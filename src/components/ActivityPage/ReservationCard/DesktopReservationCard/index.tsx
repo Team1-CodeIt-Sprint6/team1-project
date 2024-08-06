@@ -10,6 +10,7 @@ import TotalSummary from '@/components/ActivityPage/ReservationCard/ReservationC
 import DatePicker from '@/components/common/DatePicker/DatePicker';
 import { Modal, useModal } from '@/components/common/Modal';
 import { useReservation } from '@/hooks/useReservation';
+import { isReservationValid } from '@/lib/utils/isReservationValid';
 import {
   CardEventHandlerType,
   ReservationStateType,
@@ -26,6 +27,7 @@ export default function DesktopReservationCard({
 }: DesktopReservationCardProps) {
   const { submitReservation, isSuccess } = useReservation();
   const { openModal, closeModal, isOpen, modalType, message } = useModal();
+  const isValidate = isReservationValid(reservationState);
 
   const handleSubmit = () => {
     submitReservation(reservationState);
@@ -77,8 +79,10 @@ export default function DesktopReservationCard({
             onClick={onClick}
           />
           {/* api post 요청 보내기  */}
+
           <ReservationButton
-            className="mx-auto my-[24px] block w-full rounded-[4px] bg-kv-primary-blue"
+            disabled={!isValidate}
+            className={`mx-auto my-[24px] block w-full rounded-[4px] ${isValidate ? 'bg-kv-primary-blue' : 'bg-kv-gray-300'}`}
             onClick={handleSubmit}
           />
           <div className="divider" />

@@ -6,6 +6,7 @@ import ReservationButton from '@/components/ActivityPage/ReservationCard/Reserva
 import TotalSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/TotalSummary';
 import { Modal, useModal } from '@/components/common/Modal';
 import { useReservation } from '@/hooks/useReservation';
+import { isReservationValid } from '@/lib/utils/isReservationValid';
 import {
   CardEventHandlerType,
   ReservationStateType,
@@ -21,6 +22,7 @@ export default function Step3TabletCard({
 }: TabletStep1CardProps) {
   const { submitReservation } = useReservation();
   const { isOpen, closeModal, message, modalType } = useModal();
+  const isValidate = isReservationValid(reservationState);
 
   return (
     <div className="w-[251px] rounded-xl border-[1px] shadow-md">
@@ -47,8 +49,9 @@ export default function Step3TabletCard({
         />
       </div>
       <ReservationButton
+        disabled={!isValidate}
         onClick={() => submitReservation(reservationState)}
-        className="mx-auto my-[24px] block w-[203px] rounded-[4px] bg-kv-primary-blue"
+        className={`mx-auto my-[24px] block w-[203px] rounded-[4px] ${isValidate ? 'bg-kv-primary-blue' : 'bg-kv-gray-300'}`}
       />
       <div className="divider" />
       <TotalSummary
