@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 
 import ErrorText from '@/components/common/ErrorText';
 import { getUserData } from '@/lib/apis/getUserData';
-import { ProfileProps, updateUserData } from '@/lib/apis/updateUserData';
+import { updateUserData } from '@/lib/apis/updateUserData';
+import { UpdateUser } from '@/types/userTypes';
 
 export default function EditProfileForm() {
   const {
@@ -13,10 +14,10 @@ export default function EditProfileForm() {
     watch,
     trigger,
     reset,
-  } = useForm<ProfileProps>({
+  } = useForm<UpdateUser>({
     mode: 'onChange',
   });
-  const [userData, setUserData] = useState<ProfileProps | null>(null);
+  const [userData, setUserData] = useState<UpdateUser | undefined>();
 
   const password = watch('password');
   const newPassword = watch('newPassword');
@@ -33,8 +34,8 @@ export default function EditProfileForm() {
   }, [reset]);
 
   // 유저 정보 수정 요청
-  const onSubmit = async (data: ProfileProps) => {
-    const updateData: Partial<ProfileProps> = {};
+  const onSubmit = async (data: UpdateUser) => {
+    const updateData: Partial<UpdateUser> = {};
 
     if (data.nickname && data.nickname !== userData?.nickname) {
       updateData.nickname = data.nickname;

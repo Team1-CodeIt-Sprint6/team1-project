@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import PenIcon from '@/assets/icons/icon_pen.svg';
 import DefaultProfile from '@/assets/images/profile_default_img.png';
-import { createPresignedUrl, uploadUrlToS3 } from '@/lib/apis/getPresignedUrl';
+import { createPresignedUrl } from '@/lib/apis/getPresignedUrl';
 import { getUserData } from '@/lib/apis/getUserData';
 import { updateUserData } from '@/lib/apis/updateUserData';
 
