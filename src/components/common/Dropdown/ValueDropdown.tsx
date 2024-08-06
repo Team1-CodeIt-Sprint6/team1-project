@@ -29,6 +29,7 @@ export default function ValueDropdown({
 }: ValueDropdownProps) {
   return (
     <div className="relative w-full" ref={dropdownRef}>
+      {/* 드롭다운 버튼 */}
       <button
         // NOTE: 다른 곳에서 사용시 value-dropdown-button 부분만 필요에 따라 바꾸면 될 것 같습니다.
         className={`value-dropdown-button flex w-full items-center justify-between ${value ? '' : 'text-kv-gray-a1'} `}
@@ -51,15 +52,19 @@ export default function ValueDropdown({
       {isOpen && (
         // NOTE: 다른 곳에서 사용시 pos-value-dropdown-menus 부분만 필요에 따라 바꾸면 될 것 같습니다.
         <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md">
-          {availableValues.map((value, idx) => (
-            <button
-              key={value}
-              className={`dropdown-menu w-full ${idx === 0 ? 'rounded-t-md border' : ''} ${idx === availableValues.length - 1 ? 'rounded-b-md' : ''}`}
-              onClick={(e) => onClickMenu(value)(e)}
-            >
-              {value}
-            </button>
-          ))}
+          {availableValues.map((value, idx) => {
+            const isFirst = idx === 0;
+            const isLast = idx === availableValues.length - 1;
+            return (
+              <button
+                key={value}
+                className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md border' : ''} ${isLast ? 'rounded-b-md' : ''}`}
+                onClick={(e) => onClickMenu(value)(e)}
+              >
+                {value}
+              </button>
+            );
+          })}
         </ul>
       )}
     </div>
