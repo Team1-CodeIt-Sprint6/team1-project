@@ -25,7 +25,7 @@ export default function DesktopReservationCard({
   onClick,
   reservationState,
 }: DesktopReservationCardProps) {
-  const { submitReservation, isSuccess } = useReservation();
+  const { submitReservation, isSuccess, isError } = useReservation();
   const { openModal, closeModal, isOpen, modalType, message } = useModal();
   const isValidate = isReservationValid(reservationState);
 
@@ -42,7 +42,13 @@ export default function DesktopReservationCard({
     if (isSuccess) {
       openModal('alert', `예약이 성공적으로 완료되었습니다.`);
     }
-  }, [isSuccess, openModal]);
+    if (isError) {
+      openModal(
+        'alert',
+        `요청하신 날짜에는 예약이 불가능합니다. 다른 날짜를 선택해 주세요.`,
+      );
+    }
+  }, [isSuccess, isError, openModal]);
 
   return (
     <>

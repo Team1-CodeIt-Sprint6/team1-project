@@ -22,7 +22,7 @@ export default function Step3TabletCard({
   onClick,
   reservationState,
 }: TabletStep1CardProps) {
-  const { submitReservation, isSuccess } = useReservation();
+  const { submitReservation, isSuccess, isError } = useReservation();
   const { isOpen, openModal, closeModal, message, modalType } = useModal();
   const isValidate = isReservationValid(reservationState);
 
@@ -30,7 +30,13 @@ export default function Step3TabletCard({
     if (isSuccess) {
       openModal('alert', `예약이 성공적으로 완료되었습니다.`);
     }
-  }, [isSuccess, openModal]);
+    if (isError) {
+      openModal(
+        'alert',
+        `요청하신 날짜에는 예약이 불가능합니다. 다른 날짜를 선택해 주세요.`,
+      );
+    }
+  }, [isSuccess, isError, openModal]);
 
   return (
     <div className="w-[251px] rounded-xl border-[1px] shadow-md">
