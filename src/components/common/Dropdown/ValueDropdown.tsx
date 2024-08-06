@@ -53,6 +53,7 @@ export default function ValueDropdown({
         <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md">
           {availableValues.map((value, idx) => (
             <button
+              key={value}
               className={`dropdown-menu w-full ${idx === 0 ? 'rounded-t-md border' : ''} ${idx === availableValues.length - 1 ? 'rounded-b-md' : ''}`}
               onClick={(e) => onClickMenu(value)(e)}
             >
