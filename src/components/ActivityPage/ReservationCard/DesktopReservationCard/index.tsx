@@ -24,16 +24,20 @@ export default function DesktopReservationCard({
   return (
     <div className="w-[384px] rounded-lg border bg-white p-4 shadow-lg">
       <PriceDisplay
+        containerClassName="pt-[20px] pl-0"
+        priceClassName="text-kv-3xl font-kv-bold"
+        unitClassName="text-kv-xl font-kv-regular"
         price={reservationState.price}
         headCount={reservationState.headCount}
       />
-      <div className="my-[16px] divider" />
+      <div className="!my-[16px] divider" />
       <div className="mx-auto w-[336px]">
         <ContentTitle />
         <div className="mb-[16px] align-center">
           <DatePicker
             onClick={onClick.handleCalendarClick}
             variant="inline"
+            noneToggle
             className="mb-4 w-full"
           />
         </div>
