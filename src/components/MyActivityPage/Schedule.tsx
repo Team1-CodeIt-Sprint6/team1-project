@@ -4,14 +4,13 @@ import { Schedule as ScheduleType } from '@/types/activityTypes';
 
 interface DateProps {
   schedule: ScheduleType;
-  idx: number;
-  onClickDelete: (idx: number) => void;
+  onClickDelete: () => void;
 }
 
 /* NOTE: 날짜를 확인/제거할 수 있는 컴포넌트
  * onClickDelete: 날짜 제거를 반영하는 함수
  */
-export default function Schedule({ schedule, idx, onClickDelete }: DateProps) {
+export default function Schedule({ schedule, onClickDelete }: DateProps) {
   return (
     <div className="schedule-my-act">
       {/* 날짜 */}
@@ -30,7 +29,7 @@ export default function Schedule({ schedule, idx, onClickDelete }: DateProps) {
       <button
         className="relative size-11 hover:brightness-95 active:brightness-90 pc:size-14 tablet:size-14"
         type="button"
-        onClick={() => onClickDelete(idx)}
+        onClick={onClickDelete}
       >
         <Image src="/assets/icons/icon_minus.svg" alt="날짜 제거" fill />
       </button>
