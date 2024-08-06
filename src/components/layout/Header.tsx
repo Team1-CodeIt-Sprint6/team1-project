@@ -1,12 +1,32 @@
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
-import { useAuth } from '@/hooks/useAuth';
+import useFetchData from '@/hooks/useFetchData';
+import { getUserMe } from '@/lib/apis/userApis';
+import { User } from '@/types/userTypes';
 
 function Header() {
-  const { isLoggedIn, user } = useAuth();
+  const accessToken = getCookie('accessToken');
+  const {
+    data: user,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
+  } = useFetchData<User>(['userInfo'], getUserMe, {
+    enabled: !!accessToken,
+  });
+  const isLoggedIn = isSuccess;
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error loading user data: {error.message}</div>;
+  }
 
   const handleNotificationClick = () => {
     //알림 컴포넌트 나오는 로직

@@ -1,31 +1,19 @@
-import { AxiosError, AxiosResponse } from 'axios';
-
 import { User } from '@/types/userTypes';
 
 import instance from './axios';
 
-export const getUserMe = async (
-  accessToken: string | undefined,
-): Promise<User> => {
+export const getUserMe = async (): Promise<{ data: User }> => {
   const URL = '/users/me';
 
   try {
-    if (accessToken) {
-      const response: AxiosResponse<User> = await instance.get(URL);
-      return response.data;
+    const response = await instance.get(URL);
+    if (response.data) {
+      return { data: response.data };
     } else {
-      {
-        throw new Error('AccessToken이 없습니다.');
-      }
+      throw new Error('No data returned from API');
     }
   } catch (error) {
-    const err = error as AxiosError;
-    if (err.response) {
-      console.error('Response error:', err.response.status);
-      console.error('Response data:', err.response.data);
-      throw err;
-    }
-    console.error(error);
+    console.error('Failed to fetch user data:', error);
     throw error;
   }
 };
