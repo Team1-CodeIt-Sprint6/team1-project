@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { formatFromDashToSlash } from '@/lib/utils/formatData';
+import { convertAPItoSelected } from '@/lib/utils/formatDate';
 import { Schedule as ScheduleType } from '@/types/activityTypes';
 
 interface DateProps {
@@ -17,7 +17,7 @@ export default function Schedule({ schedule, idx, onClickDelete }: DateProps) {
     <div className="flex h-11 gap-1 pc:h-14 pc:gap-5 tablet:h-14 tablet:gap-2">
       {/* 날짜 */}
       <div className="input-my-act w-[130px] pc:w-[380px] tablet:w-[150px]">
-        {formatFromDashToSlash(schedule.date)}
+        {convertAPItoSelected(schedule.date)}
       </div>
 
       {/* 시간 */}
