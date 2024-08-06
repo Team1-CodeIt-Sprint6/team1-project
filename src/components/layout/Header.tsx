@@ -68,10 +68,10 @@ function Header() {
         ) : (
           <div className="flex w-[111px] justify-between">
             <Link href="/login">
-              <span className={`${LINK_STYLES}`}>로그인</span>
+              <span className="header-link-styles">로그인</span>
             </Link>
             <Link href="/signup">
-              <span className={`${LINK_STYLES}`}>회원가입</span>
+              <span className="header-link-styles">회원가입</span>
             </Link>
           </div>
         )}
@@ -81,6 +81,3 @@ function Header() {
 }
 
 export default Header;
-
-const LINK_STYLES =
-  'cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800 cursor:pointer';
