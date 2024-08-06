@@ -15,10 +15,12 @@ interface DateProps {
 export default function Schedule({ schedule, idx, onClickDelete }: DateProps) {
   return (
     <div className="pc-gap-[5px] flex h-11 gap-1 pc:h-14 pc:gap-5 tablet:h-14 tablet:gap-2">
+      {/* 날짜 */}
       <div className="input-my-act w-[130px] pc:w-[380px] tablet:w-[150px]">
         {formatFromDashToSlash(schedule.date)}
       </div>
 
+      {/* 시간 */}
       <div className="flex h-full gap-1 pc:gap-3 tablet:gap-[5px]">
         <div className="input-my-act w-[80px] pc:w-[140px] tablet:w-[104px]">
           {schedule.startTime}
@@ -29,6 +31,7 @@ export default function Schedule({ schedule, idx, onClickDelete }: DateProps) {
         </div>
       </div>
 
+      {/* 삭제버튼 */}
       <button
         className="relative size-11 hover:brightness-95 active:brightness-90 pc:size-14 tablet:size-14"
         onClick={() => onClickDelete(idx)}
