@@ -46,7 +46,6 @@ function Header() {
   return (
     <header className="h-[70px] border-b border-gray-300 bg-white p-4 align-center">
       <div className="layout-content-container h-[30px] justify-between">
-        <></>
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
             <Image
