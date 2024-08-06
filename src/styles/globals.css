@@ -138,10 +138,10 @@
   }
 
   .pos-value-dropdown-menus {
-    @apply top-12 pc:top-16 tablet:top-16;
+    @apply top-12 max-h-[220px] overflow-y-scroll border border-kv-gray-300 pc:top-16 pc:max-h-[300px] tablet:top-16;
   }
 
   .dropdown-menu {
-    @apply value-dropdown-basic border border-t-0 border-kv-gray-300 active:bg-kv-gray-200;
+    @apply value-dropdown-basic border-kv-gray-300 active:bg-kv-gray-200;
   }
 }

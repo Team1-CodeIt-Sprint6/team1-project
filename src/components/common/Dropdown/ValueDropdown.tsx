@@ -58,7 +58,7 @@ export default function ValueDropdown({
             return (
               <button
                 key={value}
-                className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md border' : ''} ${isLast ? 'rounded-b-md' : ''}`}
+                className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'}`}
                 onClick={(e) => onClickMenu(value)(e)}
               >
                 {value}
