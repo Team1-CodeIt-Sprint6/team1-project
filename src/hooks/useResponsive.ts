@@ -1,9 +1,9 @@
-import { useMediaQuery } from 'react-usehooks-ts';
+import { useMediaQuery } from 'usehooks-ts';
 
 function useResponsive() {
-  const isMobile = useMediaQuery(767); // max-width: 767px
-  const isTablet = useMediaQuery(1199) && !isMobile; // max-width: 1200px
-  const isDesktop = !isMobile && !isTablet; // 1024px 이상
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1199px)');
+  const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   return {
     isMobile,
