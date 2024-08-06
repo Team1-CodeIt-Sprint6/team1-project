@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ImageCard from '@/components/MyActivityPage/ImageCard';
 import ImageInput from '@/components/MyActivityPage/ImageInput';
 
-// 이미지 리스트 관리를 돕는 훅 (추가 / 확인 / 제거)
+// 이미지 리스트 관리를 돕는 훅 (추가 / 제거 / 확인)
 const useImageManager = (maxLength: number) => {
   const [imageFiles, setImageFiles] = useState<File[]>([]);
 
