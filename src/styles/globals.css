@@ -74,7 +74,6 @@
     @apply pr-[10px];
   }
 }
-/* date picker styles */
 
 /* DayMarker styles */
 @layer components {
@@ -86,7 +85,6 @@
     @apply bg-kv-primary-blue text-white;
   }
 }
-/* DayMarker styles */
 
 /* Layout styles */
 @layer components {
@@ -119,8 +117,8 @@
     @apply h-[120px] w-full;
   }
 }
-/* Layout styles */
 
+/* Layout styles */
 @layer utilities {
   .align-center {
     @apply flex items-center justify-center;
@@ -169,7 +167,7 @@
   }
 
   .container-summary-total-default {
-    @apply flex justify-between border-t border-kv-gray-300 pt-4;
+    @apply flex justify-between;
   }
 
   .label-summary-total-default {

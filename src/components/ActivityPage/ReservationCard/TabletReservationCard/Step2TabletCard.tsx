@@ -29,6 +29,7 @@ export default function Step2TabletCard({
             onClick.handleCalendarClick(date);
           }}
           variant="inline"
+          noneToggle={true}
           className="text-kv-md font-kv-semibold"
         />
       </div>

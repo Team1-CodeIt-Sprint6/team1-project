@@ -40,7 +40,7 @@ function ReservationModal({
         />
       )}
       <Button
-        className="fixed bottom-[40px] h-[56px] w-[327px] rounded-[4px] bg-kv-primary-blue text-white"
+        className="my-[16px] h-[56px] w-[327px] rounded-[4px] bg-kv-primary-blue text-white"
         onClick={onClick.handleNextStepClick}
       >
         확인

@@ -4,12 +4,12 @@ import ParticipantCounter from '@/components/ActivityPage/ReservationCard/Reserv
 import PriceDisplay from '@/components/ActivityPage/ReservationCard/ReservationCommon/PriceDisplay';
 import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
 import TotalSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/TotalSummary';
-import { isReservationValid } from '@/lib/utils/isReservationValid';
+import { Modal, useModal } from '@/components/common/Modal';
+import { useReservation } from '@/hooks/useReservation';
 import {
   CardEventHandlerType,
   ReservationStateType,
 } from '@/types/activityDetailPageTypes';
-
 interface TabletStep1CardProps {
   onClick: CardEventHandlerType;
   reservationState: ReservationStateType;
@@ -19,6 +19,9 @@ export default function Step3TabletCard({
   onClick,
   reservationState,
 }: TabletStep1CardProps) {
+  const { submitReservation } = useReservation();
+  const { isOpen, closeModal, message, modalType } = useModal();
+
   return (
     <div className="w-[251px] rounded-xl border-[1px] shadow-md">
       <PriceDisplay
@@ -44,12 +47,19 @@ export default function Step3TabletCard({
         />
       </div>
       <ReservationButton
-        onClick={onClick.handleCloseClick}
+        onClick={() => submitReservation(reservationState)}
         className="mx-auto my-[24px] block w-[203px] rounded-[4px] bg-kv-primary-blue"
       />
+      <div className="divider" />
       <TotalSummary
         totalAmount={reservationState.price * reservationState.headCount}
         containerClassName="px-[24px] py-[16px]"
+      />
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        message={message}
+        type={modalType}
       />
     </div>
   );

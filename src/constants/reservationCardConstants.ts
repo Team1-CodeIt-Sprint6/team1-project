@@ -24,4 +24,5 @@ export const INITIAL_RESERVATION_STATE = {
   step: 1,
   isToggleModal: false,
   schedules: [],
+  scheduleId: 0,
 };

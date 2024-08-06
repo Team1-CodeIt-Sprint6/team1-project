@@ -20,10 +20,13 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
     (schedule) => schedule.date === date,
   );
 
-  const handleTimeClick = (startTime: string, endTime: string) => {
-    onClick.handleTimeChange(startTime, endTime);
+  const handleTimeClick = (
+    startTime: string,
+    endTime: string,
+    scheduleId: number,
+  ) => {
+    onClick.handleTimeChange(startTime, endTime, scheduleId);
   };
-
   return (
     <div className="w-[327px]">
       <p className="text-kv-2lg font-kv-bold">
@@ -35,7 +38,7 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
         </p>
       ) : (
         <div className="mt-[14px] flex flex-wrap gap-3">
-          {filteredSchedules.map(({ id, startTime, endTime }) => (
+          {filteredSchedules.map(({ startTime, endTime, id }) => (
             <Button
               key={id}
               className={`h-[46px] w-[117px] ${
@@ -44,7 +47,7 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
                   : 'border-[2px] border-kv-primary-blue text-kv-primary-blue'
               }`}
               onClick={() => {
-                handleTimeClick(startTime, endTime);
+                handleTimeClick(startTime, endTime, id);
                 setSelectedId(id);
               }}
             >

@@ -56,7 +56,7 @@ export default function InlineDateSection({
 
   const currentComponent = isOpen ? 'openCalendar' : 'closedCalendar';
 
-  if (noneToggle) return dateComponents.closedCalendar;
+  if (noneToggle) return dateComponents.openCalendar;
 
   return dateComponents[currentComponent];
 }

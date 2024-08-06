@@ -24,6 +24,7 @@ export default function Step1MobileCard({
             onClick.handleCalendarClick(date);
           }}
           variant="inline"
+          noneToggle={true}
           className="text-kv-md font-kv-semibold"
         />
       </div>

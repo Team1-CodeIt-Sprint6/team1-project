@@ -47,11 +47,16 @@ export function useCardEventHandler(
       }));
     },
 
-    handleTimeChange: (startTime: string, endTime: string) => {
+    handleTimeChange: (
+      startTime: string,
+      endTime: string,
+      scheduleId: number,
+    ) => {
       setReservationState((prevState) => ({
         ...prevState,
         startTime: startTime,
         endTime: endTime,
+        scheduleId: scheduleId,
       }));
     },
   };

@@ -37,6 +37,7 @@ export default function Step1TabletCard({
         />
       </div>
       <ReservationButton className="mx-auto my-[24px] block h-[56px] w-[203px] rounded-[4px] bg-kv-gray-600" />
+      <div className="mb-[16px] divider" />
       <TotalSummary
         totalAmount={reservationState.price * reservationState.headCount}
         containerClassName="px-[24px] py-[16px]"

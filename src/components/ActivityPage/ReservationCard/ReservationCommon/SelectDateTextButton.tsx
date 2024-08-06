@@ -17,7 +17,7 @@ export default function SelectDateTextButton({
     <Button
       className={classNames('base-button-date-select-default', className)}
       type="button"
-      onClick={onClick.handleNextStepClick}
+      onClick={onClick.handleModalToggle}
     >
       날짜 선택하기
     </Button>
