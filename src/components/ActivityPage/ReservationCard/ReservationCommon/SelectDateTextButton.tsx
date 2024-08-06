@@ -6,7 +6,7 @@ import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
 
 interface SelectDateTextButtonProps {
   className?: string;
-  onClick: CardEventHandlerType;
+  onClick: () => void;
 }
 
 export default function SelectDateTextButton({
@@ -17,7 +17,7 @@ export default function SelectDateTextButton({
     <Button
       className={classNames('base-button-date-select-default', className)}
       type="button"
-      onClick={onClick.handleModalToggle}
+      onClick={onClick}
     >
       날짜 선택하기
     </Button>

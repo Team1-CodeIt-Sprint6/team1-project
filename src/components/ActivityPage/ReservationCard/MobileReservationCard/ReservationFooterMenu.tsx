@@ -44,7 +44,7 @@ function ReservationFooterMenu({
           )}
           {!isValidate && (
             <SelectDateTextButton
-              onClick={onClick}
+              onClick={onClick.handleModalToggle}
               className="mt-0 underline"
             />
           )}

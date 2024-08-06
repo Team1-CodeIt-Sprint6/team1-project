@@ -27,7 +27,7 @@ export default function Step1TabletCard({
       <div className="divider" />
       <div className="mb-[27px] pl-[24px]">
         <ContentTitle className="mb-0" />
-        <SelectDateTextButton onClick={onClick} />
+        <SelectDateTextButton onClick={onClick.handleNextStepClick} />
       </div>
       <div className="pl-[24px]">
         <ParticipantCounter

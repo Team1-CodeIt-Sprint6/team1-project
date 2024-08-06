@@ -13,7 +13,6 @@ interface TabletReservationCardProps {
   onClick: CardEventHandlerType;
   reservationState: ReservationStateType;
 }
-
 export default function TabletReservationCard({
   onClick,
   reservationState,
