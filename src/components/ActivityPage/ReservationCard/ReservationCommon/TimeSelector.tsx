@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/Button';
 import { RESERVATION_TIMESELECTOR_PLACEHOLDER } from '@/constants/reservationCardConstants';
@@ -27,6 +27,12 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
   ) => {
     onClick.handleTimeChange(startTime, endTime, scheduleId);
   };
+
+  useEffect(() => {
+    onClick.handleTimeChange('', '', 0);
+    setSelectedId(0);
+  }, [reservationState.date]);
+
   return (
     <div className="w-[327px]">
       <p className="text-kv-2lg font-kv-bold">
