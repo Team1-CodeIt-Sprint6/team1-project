@@ -135,15 +135,15 @@
   }
 
   .layout-header-spacer {
-    @apply h-[70px] w-full;
+    @apply h-[70px] w-full bg-kv-gray-100;
   }
 
   .layout-content-margin-top {
-    @apply min-h-6;
+    @apply min-h-6 bg-kv-gray-100;
   }
 
   .layout-content-margin-bottom {
-    @apply h-[120px] w-full;
+    @apply h-[120px] w-full bg-kv-gray-100;
   }
 }
 
