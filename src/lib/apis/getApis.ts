@@ -1,11 +1,11 @@
 import instance from '@/lib/apis/axios';
-import { MyReservationsResponse } from '@/types/page/myReservationsPageTypes';
+import { ReservationDashboardResponse } from '@/types/page/ReservationDashboardPageTypes';
 
 // 예약 현황
-export const getMyReservations = async (): Promise<{
-  data: MyReservationsResponse;
+export const getReservationDashboard = async (): Promise<{
+  data: ReservationDashboardResponse;
 }> => {
   const response =
-    await instance.get<MyReservationsResponse>('/my-reservations');
+    await instance.get<ReservationDashboardResponse>('/my-reservations');
   return { data: response.data };
 };

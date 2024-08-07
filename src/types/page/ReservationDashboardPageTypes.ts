@@ -1,11 +1,11 @@
-export interface Activity {
+export interface ReservationDashboardActivity {
   id: number;
   title: string;
   bannerImageUrl: string;
 }
 
-export interface Reservation {
-  activity: Activity;
+export interface ReservationDashboardItem {
+  activity: ReservationDashboardActivity;
   scheduleId: number;
   id: number;
   teamId: string;
@@ -21,8 +21,8 @@ export interface Reservation {
   updatedAt: string;
 }
 
-export interface MyReservationsResponse {
+export interface ReservationDashboardResponse {
   totalCount: number;
-  reservations: Reservation[];
+  reservations: ReservationDashboardItem[];
   cursorId: number | null;
 }

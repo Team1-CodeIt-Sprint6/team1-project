@@ -1,10 +1,10 @@
-import MyReservationsDropdown from '@/components/MyReservationsPage/MyReservationsDropdown';
+import ReservationDashboardDropdown from '@/components/ReservationDashboardPage/ReservationDashboardDropdown';
 import useDropdown from '@/hooks/useDropdown';
-import useMyReservationData from '@/hooks/useMyReservationData';
+import useReservationDashboardData from '@/hooks/useReservationDashboardData';
 
-export default function MyReservations() {
+export default function ReservationDashboard() {
   const dropdown = useDropdown('');
-  const { availableValues } = useMyReservationData();
+  const { availableValues } = useReservationDashboardData();
 
   return (
     <div className="flex min-w-[342px] flex-col">
@@ -12,7 +12,7 @@ export default function MyReservations() {
         <h1 className="text-kv-3xl font-kv-bold">예약 현황</h1>
       </div>
       <div className="mb-[24px] h-[56px]">
-        <MyReservationsDropdown
+        <ReservationDashboardDropdown
           label="체험명"
           value={dropdown.value}
           availableValues={availableValues}

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 
-interface MyReservationsDropdownProps {
+interface ReservationDashboardDropdownProps {
   value: string;
   placeholder: string;
   availableValues: string[];
@@ -28,7 +28,7 @@ export default function MyReservationsDropdown({
   onBlurButton,
   onClickMenu,
   label,
-}: MyReservationsDropdownProps) {
+}: ReservationDashboardDropdownProps) {
   return (
     <div className="relative w-full">
       {label && (
