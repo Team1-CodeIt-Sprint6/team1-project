@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -38,6 +39,7 @@ const schema = yup.object().shape({
 
 export default function MyActivityForm() {
   const category = useDropdown('');
+  const [address, setAddress] = useState('');
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const banner = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]);
   const sub = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.SUB]);
@@ -56,6 +58,7 @@ export default function MyActivityForm() {
     mode: 'onBlur',
   });
 
+  // 스케줄 추가 / 삭제
   const handleAddSchedule = (schedule: Schedule) => {
     if (checkDuplication(schedules, schedule)) {
       openModal('alert', '기존에 추가된 일정과 겹칩니다.');
@@ -65,11 +68,18 @@ export default function MyActivityForm() {
     setSchedules((prev) => [...prev, schedule]);
     return true;
   };
-
   const handleDeleteSchedule = (idx: number) => {
     setSchedules((prev) => prev.filter((s, i) => i !== idx));
   };
 
+  // 다음 주소 검색 시스템
+  const open = useDaumPostcodePopup(process.env.NEXT_PUBLIC_POSTCODE_API_URL);
+
+  const handleClickAddress = () => {
+    open({ onComplete: (data) => setAddress(data.address) });
+  };
+
+  // 모달 닫기
   const handleClickModal = () => {
     closeModal();
     if (isSuccess) {
@@ -77,6 +87,7 @@ export default function MyActivityForm() {
     }
   };
 
+  // 데이터 검증, 폼데이터 형성, 서버 요청 보내기, 리다이렉션
   const onSubmit = async (data: InputForm) => {
     // 필수항목 중 제목, 설명, 가격, 주소는 hook-form으로 처리하고,
     // 카테고리, 배너이미지 값이 있는지 확인합니다.
@@ -192,13 +203,13 @@ export default function MyActivityForm() {
         <div className="flex flex-col">
           <h2 className="h2-my-act">*주소</h2>
           <input
-            // TODO: 다음 우편번호 서비스 이용해야 함
-            className="input-my-act"
-            // className="input-my-act cursor-pointer"
+            className="input-my-act cursor-pointer"
             id="address"
             type="string"
-            // readOnly
+            value={address}
+            readOnly
             placeholder="주소를 입력해주세요."
+            onClick={handleClickAddress}
             {...register('address')}
           />
         </div>
