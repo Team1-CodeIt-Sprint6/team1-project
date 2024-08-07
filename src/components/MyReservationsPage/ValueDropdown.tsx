@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { MouseEventHandler, MutableRefObject } from 'react';
+import { MouseEventHandler } from 'react';
 
 interface ValueDropdownProps {
   value: string;
@@ -32,14 +32,16 @@ export default function ValueDropdown({
   return (
     <div className="relative w-full">
       {label && (
-        <label className="absolute -top-3 left-3 z-10 bg-white px-1 text-sm text-kv-gray-600">
-          {label}
-        </label>
+        <div className="absolute left-[11px] z-[1] h-[2px] w-[38px] bg-white">
+          <label className="absolute -top-[10px] z-10 text-sm text-kv-black">
+            {label}
+          </label>
+        </div>
       )}
       {/* 드롭다운 버튼 */}
       <button
         // NOTE: 다른 곳에서 사용시 value-dropdown-button 부분만 필요에 따라 바꾸면 될 것 같습니다.
-        className={`value-dropdown-button flex w-full items-center justify-between ${
+        className={`flex w-full items-center justify-between rounded border border-kv-gray-79 bg-white p-2.5 pc:px-4 pc:py-[15px] tablet:px-4 tablet:py-[15px] ${
           value ? '' : 'text-kv-gray-a1'
         } relative`}
         type="button"
