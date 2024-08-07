@@ -11,3 +11,7 @@ export interface UpdateUser extends User {
   password: string;
   newPassword: string;
 }
+
+export interface UrlProps {
+  profileImageUrl: string;
+}

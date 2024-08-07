@@ -163,7 +163,7 @@
     @apply mb-8;
   }
 
-  .profile-label {
+  .profile-label.custom-label-style {
     @apply mb-4 block text-kv-2xl font-kv-bold;
   }
 

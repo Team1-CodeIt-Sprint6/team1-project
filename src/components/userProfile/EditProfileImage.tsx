@@ -1,67 +1,65 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import PenIcon from '@/assets/icons/icon_pen.svg';
 import DefaultProfile from '@/assets/images/profile_default_img.png';
-import { createPresignedUrl } from '@/lib/apis/getPresignedUrl';
-import { getUserData } from '@/lib/apis/getUserData';
-import { updateUserData } from '@/lib/apis/updateUserData';
+import { updateUserData } from '@/lib/apis/patchApis';
+import { createPresignedUrl } from '@/lib/apis/postApis';
+import { getUserProfile } from '@/lib/apis/userApis';
 
 /**
  * NOTE: 프로필 이미지 입력받는 컴포넌트
  * onImageUpload: 실제 폼에 입력 변화를 반영하기 위한 함수
  */
 
-export interface ProfileProps {
-  initialImage: string;
-  onImageUpload?: (url: string) => void;
-}
+export default function EditProfileImage() {
+  const queryClient = useQueryClient();
+  const [profileImage, setProfileImage] = useState<string>(DefaultProfile.src);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-export default function EditProfileImage({
-  onImageUpload,
-  initialImage,
-}: ProfileProps) {
-  const [profileImage, setProfileImage] = useState<string>(
-    initialImage || DefaultProfile.src,
-  );
+  const { data, isLoading: isQueryLoading } = useQuery({
+    queryKey: ['userProfile'],
+    queryFn: getUserProfile,
+  });
+
+  // 프로필 이미지 업데이트 뮤테이션
+  const mutation = useMutation({
+    mutationFn: async (profileImageUrl: string) => {
+      await updateUserData({ profileImageUrl });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userProfile'] });
+    },
+  });
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setIsLoading(true);
       try {
         const presignedUrl = await createPresignedUrl(file);
 
-        const profileUrl = presignedUrl.split('?')[0];
-
-        setProfileImage(profileUrl);
-
-        if (onImageUpload) {
-          onImageUpload(profileUrl);
+        if (presignedUrl) {
+          const profileUrl = presignedUrl.split('?')[0];
+          setProfileImage(profileUrl);
+          mutation.mutate(profileUrl);
+        } else {
+          console.error('Presigned URL을 생성할 수 없습니다.');
         }
-
-        await updateUserData({ profileImageUrl: profileUrl });
       } catch (error) {
         console.error('이미지 업로드 실패:', error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const data = await getUserData();
-      setProfileImage(data.profileImageUrl || DefaultProfile.src);
-    };
-
-    fetchUserData();
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (profileImage) {
-        URL.revokeObjectURL(profileImage);
-      }
-    };
-  }, [profileImage]);
+    if (data && data.profileImageUrl) {
+      setProfileImage(data.profileImageUrl);
+    }
+  }, [data]);
 
   return (
     <form className="relative m-auto mb-6 h-40 w-40">
@@ -71,7 +69,7 @@ export default function EditProfileImage({
 
       <label htmlFor="uploadProfileImage">
         <span className="absolute bottom-0 right-0 z-10 cursor-pointer rounded-full bg-kv-primary-blue p-2.5 transition-all hover:scale-110">
-          <PenIcon />
+          <PenIcon alt="편집 아이콘" />
         </span>
       </label>
 
@@ -82,6 +80,12 @@ export default function EditProfileImage({
         className="hidden"
         onChange={handleImageChange}
       />
+
+      {isLoading && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50">
+          로딩중...
+        </div>
+      )}
     </form>
   );
 }
