@@ -1,23 +1,18 @@
-import { useState } from 'react';
-
-import ValueDropdown from '@/components/MyReservationsPage/ValueDropdown';
+import MyReservationsDropdown from '@/components/MyReservationsPage/MyReservationsDropdown';
 import useDropdown from '@/hooks/useDropdown';
+import useMyReservationData from '@/hooks/useMyReservationData';
 
 export default function MyReservations() {
   const dropdown = useDropdown('');
+  const { availableValues } = useMyReservationData();
 
-  const [availableValues, setAvailavleValues] = useState([
-    '등록한 체험 1',
-    '등록한 체험 2',
-    '등록한 체험 3',
-  ]);
   return (
-    <div className="flex min-w-[342px] flex-col bg-kv-blue-lighter">
+    <div className="flex min-w-[342px] flex-col">
       <div className="mb-[32px]">
         <h1 className="text-kv-3xl font-kv-bold">예약 현황</h1>
       </div>
       <div className="mb-[24px] h-[56px]">
-        <ValueDropdown
+        <MyReservationsDropdown
           label="체험명"
           value={dropdown.value}
           availableValues={availableValues}
