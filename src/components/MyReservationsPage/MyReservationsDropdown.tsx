@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 
-interface ValueDropdownProps {
+interface MyReservationsDropdownProps {
   value: string;
   placeholder: string;
   availableValues: string[];
@@ -19,7 +19,7 @@ interface ValueDropdownProps {
  * onClickButton: 드롭다운 버튼 클릭시 여닫기
  * onClickMenu: 메뉴 클릭 시 값 변경하고 닫기
  */
-export default function ValueDropdown({
+export default function MyReservationsDropdown({
   value,
   placeholder,
   availableValues,
@@ -28,7 +28,7 @@ export default function ValueDropdown({
   onBlurButton,
   onClickMenu,
   label,
-}: ValueDropdownProps) {
+}: MyReservationsDropdownProps) {
   return (
     <div className="relative w-full">
       {label && (
@@ -63,7 +63,7 @@ export default function ValueDropdown({
       {/* 드롭다운 메뉴 */}
       {isOpen && (
         // NOTE: 다른 곳에서 사용시 pos-value-dropdown-menus 부분만 필요에 따라 바꾸면 될 것 같습니다.
-        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md">
+        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col overflow-hidden rounded-md shadow-md">
           {availableValues.map((value, idx) => {
             const isFirst = idx === 0;
             const isLast = idx === availableValues.length - 1;
