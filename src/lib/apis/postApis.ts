@@ -1,5 +1,7 @@
 import { setCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 
+import { UserProfile } from '@/components/userProfile/EditProfileForm';
 import instance from '@/lib/apis/axios';
 import { ActivityResponse, MyActivityForm } from '@/types/activityTypes';
 import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
@@ -22,6 +24,19 @@ export const postLogin = async (
 ): Promise<LogInResponse> => {
   const response = await instance.post<LogInResponse>('/auth/login', formData);
   return response.data;
+};
+
+// 프로필 이미지 url 생성
+export const createPresignedUrl = async (file: File) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const res = await instance.post<UserProfile>('/users/me/image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return res.data.profileImageUrl;
 };
 
 // 체험 업로드

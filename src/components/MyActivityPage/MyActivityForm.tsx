@@ -1,15 +1,20 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import ValueDropdown from '@/components/common/Dropdown/ValueDropdown';
 import ErrorText from '@/components/common/ErrorText';
+import Modal from '@/components/common/Modal/Modal';
+import ScheduleList from '@/components/MyActivityPage/ScheduleList';
 import { MAX_IMG_LENGTH } from '@/constants/myActivityPage';
 import useDropdown from '@/hooks/useDropdown';
 import useImageManager from '@/hooks/useImageManager';
+import useModal from '@/hooks/useModal';
 import { postActivity, postActivityImage } from '@/lib/apis/postApis';
+import { checkDuplication } from '@/lib/utils/myActivityPage';
 import { CATEGORIES, Schedule } from '@/types/activityTypes';
 import { IMAGE_TYPES } from '@/types/page/myActivityPageTypes';
 
@@ -33,8 +38,12 @@ const schema = yup.object().shape({
 
 export default function MyActivityForm() {
   const category = useDropdown('');
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
   const banner = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]);
   const sub = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.SUB]);
+
+  const { modalType, message, isOpen, closeModal, openModal } = useModal();
+  const router = useRouter();
 
   const {
     register,
@@ -45,18 +54,30 @@ export default function MyActivityForm() {
     mode: 'onBlur',
   });
 
-  const router = useRouter();
+  const handleAddSchedule = (schedule: Schedule) => {
+    if (checkDuplication(schedules, schedule)) {
+      openModal('alert', '기존에 추가된 일정과 겹칩니다.');
+      return false;
+    }
+
+    setSchedules((prev) => [...prev, schedule]);
+    return true;
+  };
+
+  const handleDeleteSchedule = (idx: number) => {
+    setSchedules((prev) => prev.filter((s, i) => i !== idx));
+  };
 
   const onSubmit = async (data: InputForm) => {
     // 필수항목 중 제목, 설명, 가격, 주소는 hook-form으로 처리하고,
     // 카테고리, 배너이미지 값이 있는지 확인합니다.
     const validateInput = () => {
       if (!category.value) {
-        // openModal('alert', '카테고리를 선택해주세요');
+        openModal('alert', '카테고리를 선택해주세요');
         return false;
       }
       if (!banner.imageFiles.length) {
-        // openModal('alert', '배너 이미지를 추가해주세요.');
+        openModal('alert', '배너 이미지를 추가해주세요.');
         return false;
       }
       return true;
@@ -87,13 +108,13 @@ export default function MyActivityForm() {
       try {
         const formData = await formActivityData();
         const id = await postActivity(formData);
-        // openModal('alert', '체험 생성이 완료되었습니다.');
+        openModal('alert', '체험 생성이 완료되었습니다.');
         router.push(`/activity/${id}`);
       } catch (e) {
         if (e instanceof AxiosError) {
-          // openModal('alert', e.response?.data.message);
+          openModal('alert', e.response?.data.message);
         } else {
-          // openModal('alert', '오류가 발생했습니다.');
+          openModal('alert', '오류가 발생했습니다.');
         }
       }
     };
@@ -177,6 +198,15 @@ export default function MyActivityForm() {
         )}
       </div>
 
+      <div className="w-fit">
+        <h2 className="h2-my-act">예약 가능한 시간대</h2>
+        <ScheduleList
+          schedules={schedules}
+          onClickAdd={handleAddSchedule}
+          onClickDelete={handleDeleteSchedule}
+        />
+      </div>
+
       <div>
         <h2 className="h2-my-act">*배너 이미지</h2>
         {banner.renderImageManager()}
@@ -189,6 +219,13 @@ export default function MyActivityForm() {
       <p className="text-kv-2lg text-kv-gray-4b">
         *이미지는 최대 4개까지 등록 가능합니다.
       </p>
+
+      <Modal
+        type={modalType}
+        message={message}
+        isOpen={isOpen}
+        onClose={closeModal}
+      />
     </form>
   );
 }
