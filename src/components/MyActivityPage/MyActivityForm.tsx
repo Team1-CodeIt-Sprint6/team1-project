@@ -42,6 +42,8 @@ export default function MyActivityForm() {
   const banner = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]);
   const sub = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.SUB]);
 
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [activityId, setActivityId] = useState(0);
   const { modalType, message, isOpen, closeModal, openModal } = useModal();
   const router = useRouter();
 
@@ -66,6 +68,13 @@ export default function MyActivityForm() {
 
   const handleDeleteSchedule = (idx: number) => {
     setSchedules((prev) => prev.filter((s, i) => i !== idx));
+  };
+
+  const handleClickModal = () => {
+    closeModal();
+    if (isSuccess) {
+      router.push(`/activity/${activityId}`);
+    }
   };
 
   const onSubmit = async (data: InputForm) => {
@@ -107,9 +116,9 @@ export default function MyActivityForm() {
     const postActivityAndMove = async () => {
       try {
         const formData = await formActivityData();
-        const id = await postActivity(formData);
+        setActivityId(await postActivity(formData));
+        setIsSuccess(true);
         openModal('alert', '체험 생성이 완료되었습니다.');
-        router.push(`/activity/${id}`);
       } catch (e) {
         if (e instanceof AxiosError) {
           openModal('alert', e.response?.data.message);
@@ -224,7 +233,7 @@ export default function MyActivityForm() {
         type={modalType}
         message={message}
         isOpen={isOpen}
-        onClose={closeModal}
+        onClose={handleClickModal}
       />
     </form>
   );
