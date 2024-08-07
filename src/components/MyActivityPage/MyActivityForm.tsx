@@ -155,7 +155,7 @@ export default function MyActivityForm() {
 
       <div className="flex flex-col gap-2">
         <textarea
-          className="input-my-act h-[346px] resize-none"
+          className="input-my-act h-[346px] resize-none pc:py-[15px] tablet:py-[15px]"
           id="description"
           placeholder="*설명"
           {...register('description')}
