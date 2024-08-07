@@ -1,7 +1,12 @@
 import { setCookie } from 'cookies-next';
 
 import instance from '@/lib/apis/axios';
+import { ActivityResponse, MyActivityForm } from '@/types/activityTypes';
 import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
+import {
+  ActivityImageResponse,
+  UploadImageForm,
+} from '@/types/post/uploadImageTypes';
 
 // access token을 업데이트 하기 위한 요청
 export const updateAccessToken = async () => {
@@ -17,4 +22,23 @@ export const postLogin = async (
 ): Promise<LogInResponse> => {
   const response = await instance.post<LogInResponse>('/auth/login', formData);
   return response.data;
+};
+
+// 체험 업로드
+export const postActivity = async (formData: MyActivityForm) => {
+  const response = await instance.post<ActivityResponse>(
+    '/activities',
+    formData,
+  );
+  return response.data.id;
+};
+
+// 체험 이미지 업로드
+export const postActivityImage = async (formData: UploadImageForm) => {
+  const response = await instance.post<ActivityImageResponse>(
+    `/activities/image`,
+    formData,
+    { headers: { 'Content-Type': 'multipart/form-data' } },
+  );
+  return response.data.activityImageUrl;
 };

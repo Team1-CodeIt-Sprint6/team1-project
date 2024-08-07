@@ -1,69 +1,184 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
 import ValueDropdown from '@/components/common/Dropdown/ValueDropdown';
+import ErrorText from '@/components/common/ErrorText';
 import { MAX_IMG_LENGTH } from '@/constants/myActivityPage';
 import useDropdown from '@/hooks/useDropdown';
 import useImageManager from '@/hooks/useImageManager';
-import { CATEGORIES } from '@/types/activityTypes';
+import { postActivity, postActivityImage } from '@/lib/apis/postApis';
+import { CATEGORIES, Schedule } from '@/types/activityTypes';
 import { IMAGE_TYPES } from '@/types/page/myActivityPageTypes';
+
+interface InputForm {
+  title: string;
+  description: string;
+  price: number;
+  address: string;
+}
+
+const schema = yup.object().shape({
+  title: yup.string().required('제목을 입력해주세요.'),
+  description: yup.string().required('설명을 입력해주세요.'),
+  price: yup
+    .number()
+    .positive('가격은 양수여야 합니다.')
+    .integer('가격은 정수여야 합니다.')
+    .required('가격을 입력해주세요.'),
+  address: yup.string().required('주소를 입력해주세요.'),
+});
 
 export default function MyActivityForm() {
   const category = useDropdown('');
   const banner = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]);
   const sub = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.SUB]);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<InputForm>({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+  });
+
+  const router = useRouter();
+
+  const onSubmit = async (data: InputForm) => {
+    // 필수항목 중 제목, 설명, 가격, 주소는 hook-form으로 처리하고,
+    // 카테고리, 배너이미지 값이 있는지 확인합니다.
+    const validateInput = () => {
+      if (!category.value) {
+        // openModal('alert', '카테고리를 선택해주세요');
+        return false;
+      }
+      if (!banner.imageFiles.length) {
+        // openModal('alert', '배너 이미지를 추가해주세요.');
+        return false;
+      }
+      return true;
+    };
+
+    // 이미지를 서버에 업로드하고, formData를 형성합니다.
+    const formActivityData = async () => {
+      const bannerImageUrl = await postActivityImage({
+        image: banner.imageFiles[0],
+      });
+      const subImageUrls = await Promise.all(
+        sub.imageFiles.map((file) => postActivityImage({ image: file })),
+      );
+
+      const formData = {
+        ...data,
+        category: category.value,
+        schedules: [] as Schedule[],
+        bannerImageUrl,
+        subImageUrls,
+      };
+
+      return formData;
+    };
+
+    // 데이터를 생성, 서버에 전송하고, 새로 생성된 액티비티 페이지로 이동합니다.
+    const postActivityAndMove = async () => {
+      try {
+        const formData = await formActivityData();
+        const id = await postActivity(formData);
+        // openModal('alert', '체험 생성이 완료되었습니다.');
+        router.push(`/activity/${id}`);
+      } catch (e) {
+        if (e instanceof AxiosError) {
+          // openModal('alert', e.response?.data.message);
+        } else {
+          // openModal('alert', '오류가 발생했습니다.');
+        }
+      }
+    };
+
+    if (!validateInput()) return;
+    postActivityAndMove();
+  };
+
   return (
-    <form className="flex flex-col gap-6">
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
       <header className="flex items-center justify-between font-kv-bold">
         <h1 className="text-kv-3xl">내 체험 등록</h1>
         <button
           className="btn-blue h-12 w-[120px] rounded text-kv-lg"
           type="submit"
+          disabled={!isValid}
         >
           등록하기
         </button>
       </header>
 
-      <input
-        className="input-my-act"
-        id="title"
-        type="text"
-        placeholder="제목"
-      />
+      <div className="flex flex-col gap-2">
+        <input
+          className="input-my-act"
+          id="title"
+          type="text"
+          placeholder="*제목"
+          {...register('title')}
+        />
+        {errors.title?.message && <ErrorText>{errors.title.message}</ErrorText>}
+      </div>
 
       <ValueDropdown
-        placeholder={'카테고리'}
+        placeholder={'*카테고리'}
         availableValues={Object.values(CATEGORIES)}
         {...category}
       />
 
-      <textarea
-        className="input-my-act h-[346px] resize-none"
-        id="description"
-        placeholder="설명"
-      />
-
-      <div className="flex flex-col">
-        <h2 className="h2-my-act">가격</h2>
-        <input
-          className="input-my-act"
-          id="price"
-          type="number"
-          placeholder="가격"
+      <div className="flex flex-col gap-2">
+        <textarea
+          className="input-my-act h-[346px] resize-none"
+          id="description"
+          placeholder="*설명"
+          {...register('description')}
         />
+        {errors.description?.message && (
+          <ErrorText>{errors.description.message}</ErrorText>
+        )}
       </div>
 
-      <div className="flex flex-col">
-        <h2 className="h2-my-act">주소</h2>
-        <input
-          className="input-my-act cursor-pointer"
-          id="address"
-          type="string"
-          readOnly
-          placeholder="주소를 입력해주세요."
-        />
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
+          <h2 className="h2-my-act">*가격</h2>
+          <input
+            className="input-my-act"
+            id="price"
+            type="number"
+            placeholder="가격"
+            {...register('price')}
+          />
+        </div>
+        {errors.price?.message && <ErrorText>{errors.price.message}</ErrorText>}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
+          <h2 className="h2-my-act">*주소</h2>
+          <input
+            // TODO: 다음 우편번호 서비스 이용해야 함
+            className="input-my-act"
+            // className="input-my-act cursor-pointer"
+            id="address"
+            type="string"
+            // readOnly
+            placeholder="주소를 입력해주세요."
+            {...register('address')}
+          />
+        </div>
+        {errors.address?.message && (
+          <ErrorText>{errors.address.message}</ErrorText>
+        )}
       </div>
 
       <div>
-        <h2 className="h2-my-act">배너 이미지</h2>
+        <h2 className="h2-my-act">*배너 이미지</h2>
         {banner.renderImageManager()}
       </div>
 
