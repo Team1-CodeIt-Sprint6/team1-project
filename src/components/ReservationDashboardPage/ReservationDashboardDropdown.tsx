@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 
+import { AvailableValues } from '@/types/page/ReservationDashboardPageTypes';
+
 interface ReservationDashboardDropdownProps {
   value: string;
   placeholder: string;
-  availableValues: string[];
+  availableValues: AvailableValues[];
   isOpen: boolean;
   onClickButton: MouseEventHandler<HTMLButtonElement>;
   onBlurButton: () => void;
-  onClickMenu: (value: string) => MouseEventHandler<HTMLButtonElement>;
+  onClickMenu: (value: string) => MouseEventHandler;
   label?: string;
 }
 
@@ -64,16 +66,19 @@ export default function MyReservationsDropdown({
       {isOpen && (
         // NOTE: 다른 곳에서 사용시 pos-value-dropdown-menus 부분만 필요에 따라 바꾸면 될 것 같습니다.
         <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md scrollbar-custom">
-          {availableValues.map((value, idx) => {
+          {availableValues.map(({ title, id }, idx) => {
             const isFirst = idx === 0;
             const isLast = idx === availableValues.length - 1;
             return (
               <button
-                key={value}
+                key={id}
+                id={`${id}`}
                 className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'}`}
-                onMouseDown={(e) => onClickMenu(value)(e)}
+                onMouseDown={(e) => {
+                  onClickMenu(title)(e);
+                }}
               >
-                {value}
+                {title}
               </button>
             );
           })}

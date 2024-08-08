@@ -26,6 +26,7 @@ const useDropdown = <T>(initValue: T) => {
 
   return {
     value,
+    id,
     isOpen,
     onClickButton: handleClickButton,
     onBlurButton: () => setIsOpen(false),
