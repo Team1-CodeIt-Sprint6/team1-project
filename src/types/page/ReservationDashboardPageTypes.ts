@@ -1,28 +1,37 @@
-export interface ReservationDashboardActivity {
-  id: number;
-  title: string;
-  bannerImageUrl: string;
+// (드롭다운)내 체험 리스트 조회
+export interface MyActivitiesResponse {
+  activities: MyActivity[];
+  totalCount: number;
+  cursorId: null;
 }
 
-export interface ReservationDashboardItem {
-  activity: ReservationDashboardActivity;
-  scheduleId: number;
+// (드롭다운)내 체험 리스트 조회
+export interface MyActivity {
   id: number;
-  teamId: string;
   userId: number;
-  status: string;
-  reviewSubmitted: boolean;
-  totalPrice: number;
-  headCount: number;
-  date: string;
-  startTime: string;
-  endTime: string;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  address: string;
+  bannerImageUrl: string;
+  rating: number;
+  reviewCount: number;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface AvailableValues {
+  id: number;
+  title: string;
+}
+
+// (달력)내 체험 월별 등록 현황
 export interface ReservationDashboardResponse {
-  totalCount: number;
-  reservations: ReservationDashboardItem[];
-  cursorId: number | null;
+  date: string;
+  reservations: {
+    completed: number;
+    confirmed: number;
+    pending: number;
+  };
 }
