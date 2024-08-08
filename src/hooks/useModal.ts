@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ModalType } from '@/types/tmp';
+import { ModalType } from '@/types/modalTypes';
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
