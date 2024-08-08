@@ -6,6 +6,10 @@ import instance from '@/lib/apis/axios';
 import { ActivityResponse, MyActivityForm } from '@/types/activityTypes';
 import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
 import {
+  ReservationRequest,
+  ReservationResponse,
+} from '@/types/post/reservationTypes';
+import {
   ActivityImageResponse,
   UploadImageForm,
 } from '@/types/post/uploadImageTypes';
@@ -56,4 +60,16 @@ export const postActivityImage = async (formData: UploadImageForm) => {
     { headers: { 'Content-Type': 'multipart/form-data' } },
   );
   return response.data.activityImageUrl;
+};
+
+// 예약 신청
+export const createReservation = async (
+  activityId: number,
+  data: ReservationRequest,
+): Promise<ReservationResponse> => {
+  const response = await instance.post<ReservationResponse>(
+    `/activities/${activityId}/reservations`,
+    data,
+  );
+  return response.data;
 };

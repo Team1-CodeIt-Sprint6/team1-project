@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
@@ -19,6 +19,13 @@ import { checkDuplication } from '@/lib/utils/myActivityPage';
 import { CATEGORIES, Schedule } from '@/types/activityTypes';
 import { IMAGE_TYPES } from '@/types/page/myActivityPageTypes';
 
+interface ErrorResponse {
+  message: string;
+}
+
+interface AxiosErrorWithMessage extends AxiosError {
+  response?: AxiosResponse<ErrorResponse>;
+}
 interface InputForm {
   title: string;
   description: string;
@@ -131,8 +138,9 @@ export default function MyActivityForm() {
         setIsSuccess(true);
         openModal('alert', '체험 생성이 완료되었습니다.');
       } catch (e) {
-        if (e instanceof AxiosError) {
-          openModal('alert', e.response?.data.message);
+        const error = e as AxiosErrorWithMessage;
+        if (error.response) {
+          openModal('alert', error.response.data.message);
         } else {
           openModal('alert', '오류가 발생했습니다.');
         }
