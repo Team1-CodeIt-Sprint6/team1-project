@@ -12,13 +12,19 @@ import useResponsive from '@/hooks/useResponsive';
 import { ReservationStateType } from '@/types/activityDetailPageTypes';
 
 export default function ReservationCard() {
-  const { isMobile, isTablet, isDesktop } = useResponsive();
+  const [isClient, setIsClient] = useState(false);
   const [reservationState, setReservationState] =
     useState<ReservationStateType>(INITIAL_RESERVATION_STATE);
   const cardEventHandler = useCardEventHandler(setReservationState);
   const router = useRouter();
   const activityId = Number(router.query.id);
   const { openModal, closeModal, isOpen, modalType, message } = useModal();
+
+  const { isMobile, isTablet, isDesktop } = useResponsive();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const {
     data: activityData,
@@ -40,7 +46,7 @@ export default function ReservationCard() {
     }
   }, [activityData]);
 
-  if (isLoading) return null;
+  if (isLoading || !isClient) return null;
 
   return (
     <>
