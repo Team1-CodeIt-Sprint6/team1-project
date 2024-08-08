@@ -81,6 +81,7 @@ const config: Config = {
       screens: {
         pc: { min: '1200px' },
         tablet: { min: '768px', max: '1199px' },
+        mobile: { max: '768px' },
       },
       keyframes: {
         fadeIn: {
