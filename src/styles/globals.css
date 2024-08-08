@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply text-kv-md font-kv-regular text-kv-black;
+    @apply bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
   }
 }
 
@@ -34,13 +34,35 @@
   .size-my-act-img {
     @apply size-[167px] pc:size-[180px] tablet:size-[206px];
   }
+  .size-my-act-date {
+    @apply w-[130px] pc:w-[380px] tablet:w-[150px];
+  }
+  .size-my-act-time {
+    @apply w-[80px] pc:w-[140px] tablet:w-[104px];
+  }
 
   .h2-my-act {
     @apply mb-3 text-kv-xl font-kv-bold pc:mb-4 pc:text-kv-2xl tablet:mb-4 tablet:text-kv-2xl;
   }
 
   .input-my-act {
-    @apply border-kv-gray-79 rounded border bg-white p-2.5 text-kv-md pc:px-4 pc:py-[15px] pc:text-kv-lg tablet:px-4 tablet:py-[15px] tablet:text-kv-lg;
+    @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
+  }
+
+  .schedule-my-act {
+    @apply flex gap-1 pc:gap-5 tablet:gap-2;
+  }
+
+  .times-my-act {
+    @apply flex h-full gap-1 pc:gap-3 tablet:gap-[5px];
+  }
+
+  .label-my-act-schedule {
+    @apply text-kv-lg font-medium text-kv-gray-4b pc:text-kv-xl tablet:text-kv-xl;
+  }
+
+  .size-my-act-date .input-my-act {
+    @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
   }
 }
 
@@ -95,8 +117,8 @@
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
-  .header-link-styles{
-    @apply cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800;
+  .header-link-styles {
+    @apply cursor-pointer font-kv-medium text-kv-black kv-text-md hover:text-kv-gray-600 active:text-kv-gray-800;
   }
   .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
@@ -128,7 +150,6 @@
     @apply flex items-center justify-center;
   }
 }
-
 /* 모달 */
 @layer components {
   .modal-container {
@@ -226,11 +247,11 @@
 /* dropdown styles */
 @layer components {
   .value-dropdown-basic {
-    @apply bg-white p-2.5 hover:bg-kv-gray-100 pc:px-4 pc:py-[15px] tablet:px-4 tablet:py-[15px];
+    @apply h-11 bg-white px-2.5 hover:bg-kv-gray-100 pc:h-14 pc:px-4 tablet:h-14 tablet:px-4;
   }
 
   .value-dropdown-button {
-    @apply value-dropdown-basic border-kv-gray-79 rounded border focus:bg-kv-gray-200;
+    @apply value-dropdown-basic rounded border border-kv-gray-79 focus:bg-kv-gray-200;
   }
 
   .pos-value-dropdown-menus {
@@ -239,5 +260,41 @@
 
   .dropdown-menu {
     @apply value-dropdown-basic border-kv-gray-300 active:bg-kv-gray-200;
+  }
+}
+
+/* 프로필 스타일 */
+@layer components {
+  /* 저장하기 버튼 */
+  .save-btn {
+    @apply cursor-pointer rounded bg-kv-primary-blue px-8 py-3 font-kv-semibold text-white hover:bg-[#233CC1];
+  }
+
+  .profile-input-group {
+    @apply mb-8;
+  }
+
+  .profile-label.custom-label-style {
+    @apply mb-4 block text-kv-2xl font-kv-bold;
+  }
+
+  .profile-input {
+    @apply h-14 w-full rounded border border-kv-primary-blue-light px-5 py-4 outline-none focus:border-kv-primary-blue;
+  }
+
+  .profile-input-error {
+    @apply border-kv-red focus:border-kv-red;
+  }
+
+  .profile-input-readonly {
+    @apply cursor-not-allowed border-kv-primary-blue-light focus:border-kv-primary-blue-light;
+  }
+
+  .lnb-link {
+    @apply flex gap-3.5 rounded-xl fill-current px-5 py-2.5 font-kv-semibold text-kv-gray-600 transition ease-in-out hover:bg-kv-primary-blue-light hover:text-kv-primary-blue;
+  }
+
+  .lnb-link-active {
+    @apply bg-kv-primary-blue-light text-kv-primary-blue;
   }
 }
