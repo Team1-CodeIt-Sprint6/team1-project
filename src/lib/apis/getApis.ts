@@ -1,4 +1,5 @@
 import instance from '@/lib/apis/axios';
+import { ActivityResponse } from '@/types/activityDetailPageTypes';
 import {
   MyActivitiesResponse,
   ReservationDashboardResponse,
@@ -21,6 +22,16 @@ export const getReservationDashboard = async (
     {
       params: { year: '2024', month: '08' },
     },
+  );
+  return { data: response.data };
+};
+
+// 예약 상세 조회
+export const getActivityDetail = async (
+  activityId: number,
+): Promise<{ data: ActivityResponse }> => {
+  const response = await instance.get<ActivityResponse>(
+    `/activities/${activityId}`,
   );
   return { data: response.data };
 };
