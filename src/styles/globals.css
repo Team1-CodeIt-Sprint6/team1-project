@@ -303,7 +303,7 @@
 @layer components {
   /* 달력 최상단 컨테이너 */
   .custom-calendar.react-calendar {
-    @apply flex w-full flex-col items-center rounded-xl text-kv-xl font-kv-medium;
+    @apply flex w-full flex-col items-center rounded-xl text-kv-xl font-kv-medium shadow-lg;
   }
   /* 2024년 8월 네비게이션 컨테이너 */
   .custom-calendar .react-calendar__navigation {
