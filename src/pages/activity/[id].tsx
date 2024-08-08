@@ -3,20 +3,23 @@ import { useRouter } from 'next/router';
 import CustomKebab from '@/components/activity/CustomKebab';
 import Location from '@/components/activity/Location';
 import { ReviewRating } from '@/components/activity/Review';
-import { useActivity } from '@/hooks/useActivity';
-import { useUserData } from '@/lib/apis/getUserData';
+import useFetchData from '@/hooks/useFetchData';
+import { getActivity } from '@/lib/apis/getApis';
+import { getUserData } from '@/lib/apis/userApis';
+import { ActivityResponse } from '@/types/activityTypes';
 
 export default function ActivityPage() {
   const router = useRouter();
-  const { id } = router.query;
+  const activityId = Number(router.query.id);
 
-  const activityId = id ? parseInt(id as string, 10) : undefined;
-  if (!activityId) {
-    return <div>로딩중</div>;
-  }
-
-  const { data: activityData, isLoading } = useActivity(activityId);
-  const { data: userData } = useUserData();
+  const { data: activityData } = useFetchData<ActivityResponse>(
+    ['activity', activityId],
+    () => getActivity(activityId),
+    {
+      enabled: !!activityId,
+    },
+  );
+  const { data: userData, isLoading } = useFetchData(['user'], getUserData, {});
 
   if (isLoading) return <div>로딩중</div>;
   if (!activityData) return <div>존재하지 않는 체험입니다.</div>;

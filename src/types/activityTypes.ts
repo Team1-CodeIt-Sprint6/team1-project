@@ -10,6 +10,7 @@ export interface MyActivityForm {
 }
 
 export interface Schedule {
+  id?: number;
   date: string;
   startTime: string;
   endTime: string;
@@ -35,22 +36,15 @@ export interface ActivityResponse {
   price: number;
   address: string;
   bannerImageUrl: string;
-  subImageUrls: SubImageUrls[];
-  schedules: Schedules[];
+  subImageUrls: SubImageUrl[];
+  schedules: Schedule[];
   reviewCount: number;
   rating: number;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface SubImageUrls {
+export interface SubImageUrl {
   id: number;
   imageUrl: string;
-}
-
-export interface Schedules {
-  id: number;
-  date: string;
-  startTime: string;
-  endTime: string;
 }
