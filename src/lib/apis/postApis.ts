@@ -43,6 +43,7 @@ export const createPresignedUrl = async (file: File) => {
   return res.data.profileImageUrl;
 };
 
+
 // 체험 업로드
 export const postActivity = async (formData: MyActivityForm) => {
   const response = await instance.post<ActivityResponse>(
