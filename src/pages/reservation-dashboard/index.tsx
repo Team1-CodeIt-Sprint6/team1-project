@@ -37,6 +37,7 @@ export default function ReservationDashboard() {
           onChange={onDateChange}
           onActiveStartDateChange={onMonthChange}
           value={value}
+          minDetail={'month'}
           className="custom-calendar"
         />
       </div>

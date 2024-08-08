@@ -310,11 +310,20 @@
   }
   /* 2024년 8월 네비게이션 컨테이너 */
   .custom-calendar .react-calendar__navigation {
-    @apply h-[60px] gap-[40px] bg-none px-[24px] text-kv-xl font-kv-bold text-kv-black align-center;
+    @apply flex h-[60px] w-full max-w-[342px] gap-[38px] bg-none text-kv-xl font-kv-bold text-kv-black;
   }
-  /* 2024년 8월 네비게이션 글자 */
+  /*  */
   .custom-calendar .react-calendar__navigation__label {
-    @apply max-w-[120px];
+    @apply w-[140px];
+  }
+  /* month 이동 화살표 */
+  .custom-calendar .react-calendar__navigation__arrow {
+    @apply w-[60px];
+  }
+  /* 연도 이동 화살표 */
+  .custom-calendar .react-calendar__navigation__next2-button,
+  .custom-calendar .react-calendar__navigation__prev2-button {
+    @apply hidden;
   }
   /* 월화수목금토일 컨테이너 */
   .custom-calendar .react-calendar__month-view__weekdays {
@@ -342,14 +351,35 @@
   .custom-calendar .react-calendar__tile abbr {
     @apply pl-[12px] pt-[12px] text-kv-xl;
   }
+  /* 이전달 다음달 글자색 */
+  .custom-calendar .previus-month,
+  .custom-calendar .next-month {
+    @apply text-gray-300;
+  }
   /* 예약 현황 칩 */
-  .reservationChip {
+  .custom-calendar .reservation-chip {
     @apply z-[1] mt-[2px] flex h-[23px] w-full rounded-md pl-[4px] text-kv-xs pc:text-kv-md tablet:text-kv-md;
   }
+  .custom-calendar .chip-container {
+    @apply relative w-full px-[2px] py-[2px];
+  }
+  /* 완료 칩 */
+  .custom-calendar .complete-chip {
+    @apply bg-kv-gray-300 text-kv-black;
+  }
+  /* 예약 칩 */
+  .custom-calendar .reserve-chip {
+    @apply bg-kv-primary-blue text-white;
+  }
+  /* 승인 칩 */
+  .custom-calendar .approve-chip {
+    @apply bg-kv-orange-light text-kv-orange;
+  }
   /* 색점 */
-  .colorDot {
+  .custom-calendar .color-dot {
     @apply absolute -top-[60px] left-[36px] h-[8px] w-[8px] rounded-full;
   }
+  /*  */
 }
 
 /* 케밥 */
