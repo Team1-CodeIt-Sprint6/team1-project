@@ -24,10 +24,14 @@ const useDropdown = <T>(initValue: T) => {
     return handleClick;
   };
 
+  // 초기값으로 되돌리기
+  const handleReset = () => setValue(initValue);
+
   return {
     value,
     id,
     isOpen,
+    handleReset,
     onClickButton: handleClickButton,
     onBlurButton: () => setIsOpen(false),
     onClickMenu: handleClickMenu,
