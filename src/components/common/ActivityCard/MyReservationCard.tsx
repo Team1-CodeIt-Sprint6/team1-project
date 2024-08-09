@@ -1,33 +1,21 @@
 import React from 'react';
 
 import Button from '@/components/common/Button';
+import { MyReservation } from '@/types/get/reservationTypes';
 
 import MyCardContainer from './MyCardLayout';
 
 type MyReservationCardProps = {
-  reservation: {
-    id: number;
-    teamId: string;
-    userId: number;
-    activity: {
-      bannerImageUrl: string;
-      title: string;
-      id: number;
-    };
-    scheduleId: number;
-    status: string;
-    reviewSubmitted: boolean;
-    totalPrice: number;
-    headCount: number;
-    date: string;
-    startTime: string;
-    endTime: string;
-    createdAt: string;
-    updatedAt: string;
-  };
+  reservation: MyReservation;
+  onReviewClick: () => void;
+  onCancelClick: () => void;
 };
 
-function MyReservationCard({ reservation }: MyReservationCardProps) {
+function MyReservationCard({
+  reservation,
+  onReviewClick,
+  onCancelClick,
+}: MyReservationCardProps) {
   const getStatusTextAndColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -49,9 +37,6 @@ function MyReservationCard({ reservation }: MyReservationCardProps) {
     reservation.status,
   );
 
-  const handleReviewClick = () => {};
-  const handleCancelClick = () => {};
-
   return (
     <MyCardContainer
       imageSrc={reservation.activity.bannerImageUrl}
@@ -65,7 +50,7 @@ function MyReservationCard({ reservation }: MyReservationCardProps) {
         </div>
         <h3 className="activity-card-title">{reservation.activity.title}</h3>
         <p className="font-kv-regular text-kv-gray-700 kv-text-xs pc:kv-text-2lg tablet:kv-text-md">
-          {reservation.date} ・ {reservation.startTime} - {reservation.endTime}{' '}
+          {reservation.date} ・ {reservation.startTime} - {reservation.endTime}
           ・ {reservation.headCount}명
         </p>
       </div>
@@ -77,7 +62,7 @@ function MyReservationCard({ reservation }: MyReservationCardProps) {
           <Button
             type="button"
             className="activity-reservation-card-button border border-kv-primary-blue text-kv-primary-blue hover:bg-kv-gray-200 active:bg-kv-gray-300"
-            onClick={handleCancelClick}
+            onClick={onCancelClick}
           >
             예약 취소
           </Button>
@@ -86,7 +71,7 @@ function MyReservationCard({ reservation }: MyReservationCardProps) {
           <Button
             type="button"
             className="btn-blue activity-reservation-card-button"
-            onClick={handleReviewClick}
+            onClick={onReviewClick}
           >
             후기 작성
           </Button>

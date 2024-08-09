@@ -3,24 +3,12 @@ import React, { useState } from 'react';
 import KebabContainer from '@/components/common/Kebab/KebabContainer';
 import KebabDelete from '@/components/common/Kebab/KebabDelete';
 import KebabLink from '@/components/common/Kebab/KebabLink';
+import { MyActivity } from '@/types/get/activityTypes';
 
 import MyCardContainer from './MyCardLayout';
 
 type MyActivityCardProps = {
-  activity: {
-    id: number;
-    userId: number;
-    title: string;
-    description: string;
-    category: string;
-    price: number;
-    address: string;
-    bannerImageUrl: string;
-    rating: number;
-    reviewCount: number;
-    createdAt: string;
-    updatedAt: string;
-  };
+  activity: MyActivity;
   onDelete: () => void;
 };
 
@@ -51,7 +39,7 @@ function MyActivityCard({ activity, onDelete }: MyActivityCardProps) {
           </span>
         </p>
         <KebabContainer>
-          <KebabLink href={`/edit/${activity.id}`}>수정하기</KebabLink>
+          <KebabLink href={`/activity/${activity.id}`}>수정하기</KebabLink>
           <KebabDelete onClick={onDelete}>삭제하기</KebabDelete>
         </KebabContainer>
       </div>
