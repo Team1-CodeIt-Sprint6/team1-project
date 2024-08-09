@@ -65,6 +65,7 @@ const config: Config = {
         'kv-orange': {
           DEFAULT: '#FF7C1D',
           light: '#FFF4E8',
+          lighter: '#FF472E',
         },
         'kv-yellow': {
           DEFAULT: '#FFC23D',
@@ -81,6 +82,7 @@ const config: Config = {
       screens: {
         pc: { min: '1200px' },
         tablet: { min: '768px', max: '1199px' },
+        mobile: { max: '768px' },
       },
       keyframes: {
         fadeIn: {

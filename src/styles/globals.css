@@ -24,6 +24,10 @@
     @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
   }
 
+  .btn-outline {
+    @apply pc:w-[127px] tablet:w-[120px] pc:h-[53px] tablet:h-[53px] h-[41px] w-[90px] pc:px-5 tablet:px-4 px-3 rounded-[15px] border border-kv-primary-blue-light bg-white pc:kv-text-2lg tablet:kv-text-2lg kv-text-md font-kv-medium text-kv-gray-4b hover:bg-kv-gray-100 active:bg-kv-gray-200
+  }
+
   .base-button-default {
     @apply rounded-md py-[11px] text-kv-lg font-kv-bold;
   }
@@ -68,8 +72,8 @@
 
 /* date picker custom styles */
 @layer components {
-  .custom-datepicker .react-datepicker__header {
-    @apply border-b-0 bg-white pb-0;
+  .react-datepicker__header {
+    @apply !border-b-0 !bg-white !pb-0;
   }
 
   .custom-datepicker .react-datepicker__header {
@@ -84,20 +88,20 @@
     @apply border-kv-gray-600;
   }
 
-  .custom-datepicker .react-datepicker__day--selected {
-    @apply bg-transparent text-inherit;
+  .react-datepicker__day--selected {
+    @apply !bg-transparent !text-inherit;
   }
 
-  .custom-datepicker .react-datepicker__day:hover {
-    @apply bg-inherit text-kv-red;
+  .react-datepicker__day:hover {
+    @apply !bg-inherit text-kv-red;
   }
 
-  .custom-datepicker .react-datepicker__day--keyboard-selected {
-    @apply animate-fadeIn bg-inherit;
+  .react-datepicker__day--keyboard-selected {
+    @apply !animate-fadeIn !bg-inherit;
   }
 
-  .custom-datepicker .react-datepicker__month {
-    @apply pr-[10px];
+  .react-datepicker__month {
+    @apply !pr-[10px];
   }
 }
 
@@ -114,6 +118,9 @@
 
 /* Layout styles */
 @layer components {
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  }
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
@@ -132,15 +139,15 @@
   }
 
   .layout-header-spacer {
-    @apply h-[70px] w-full;
+    @apply h-[70px] w-full bg-kv-gray-100;
   }
 
   .layout-content-margin-top {
-    @apply min-h-6;
+    @apply min-h-6 bg-kv-gray-100;
   }
 
   .layout-content-margin-bottom {
-    @apply h-[120px] w-full;
+    @apply h-[120px] w-full bg-kv-gray-100;
   }
 }
 
@@ -261,6 +268,10 @@
   .dropdown-menu {
     @apply value-dropdown-basic border-kv-gray-300 text-left active:bg-kv-gray-200;
   }
+
+  .sort-dropdown-menu {
+    @apply block h-[41px] w-full text-left font-kv-medium text-kv-gray-4b kv-text-md align-center hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:kv-text-2lg tablet:h-[53px] tablet:kv-text-2lg border-kv-primary-blue-light;
+  }
 }
 
 /* 프로필 스타일 */
@@ -296,5 +307,38 @@
 
   .lnb-link-active {
     @apply bg-kv-primary-blue-light text-kv-primary-blue;
+  }
+}
+
+/* 케밥 */
+@layer components {
+  .kebab-menu {
+    @apply cursor-pointer py-4 text-center text-kv-2lg font-kv-medium hover:bg-kv-gray-200;
+  }
+  .kebal-first-menu {
+    @apply border-b border-kv-gray-300;
+  }
+}
+
+/* 체험 상세 */
+@layer components {
+  .top-line {
+    @apply mb-10 border-t border-kv-gray-300 pt-10;
+  }
+
+  .activity-h3 {
+    @apply mb-5 text-kv-xl font-kv-bold;
+  }
+}
+/* 체험 카드 */
+@layer components {
+  .activity-card-title {
+    @apply kv-text-md tablet:kv-text-2lg  pc:kv-text-xl font-kv-bold text-kv-black truncate;
+  }
+  .activity-card-price {
+    @apply kv-text-lg tablet:kv-text-xl pc:kv-text-2xl font-kv-medium;
+  }
+  .activity-reservation-card-button {
+    @apply w-20 h-8 pc:w-[144px] pc:h-[43.08px] tablet:w-[112px] tablet:h-10 pc:text-kv-lg tablet:text-kv-lg text-kv-md font-kv-medium align-center !important;
   }
 }
