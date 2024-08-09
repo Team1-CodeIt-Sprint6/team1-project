@@ -8,14 +8,13 @@ import { SignUpForm, SignUpResponse } from '@/types/AuthTypes';
 const useSignup = () => {
   return useMutation<SignUpResponse, unknown, SignUpForm, unknown>({
     mutationFn: postSignup,
-    onError: (error: unknown) => {
+    onError: (error) => {
       if (error instanceof AxiosError) {
-        console.error(error.response?.data.message);
+        throw new Error(error.response?.data.message);
       } else {
-        console.error('알 수 없는 오류가 발생했습니다.');
+        throw new Error('알 수 없는 오류가 발생했습니다.');
       }
     },
-    onSuccess: () => {},
   });
 };
 
