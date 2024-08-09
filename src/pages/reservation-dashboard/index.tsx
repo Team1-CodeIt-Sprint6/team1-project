@@ -1,15 +1,10 @@
-import { Calendar } from 'react-calendar';
-
 import ReservationDashboardDropdown from '@/components/ReservationDashboardPage/ReservationDashboardDropdown';
 import useDropdown from '@/hooks/useDropdown';
-import useReservationCalendar from '@/hooks/useReservationCalendar';
 import useReservationDashboardData from '@/hooks/useReservationDashboardData';
 
 export default function ReservationDashboard() {
   const dropdown = useDropdown('');
   const { availableValues } = useReservationDashboardData();
-  const { value, tileContent, tileClassName, onDateChange, onMonthChange } =
-    useReservationCalendar();
 
   return (
     <div className="flex min-w-[342px] flex-col">
@@ -28,19 +23,7 @@ export default function ReservationDashboard() {
           onClickMenu={dropdown.onClickMenu}
         />
       </div>
-      <div className="h-[872px]">
-        <Calendar
-          calendarType="gregory"
-          tileContent={tileContent}
-          tileClassName={tileClassName}
-          formatDay={(_, date) => date.getDate().toString()}
-          onChange={onDateChange}
-          onActiveStartDateChange={onMonthChange}
-          value={value}
-          minDetail={'month'}
-          className="custom-calendar"
-        />
-      </div>
+      <div className="h-[872px] bg-kv-gray-200">달력</div>
     </div>
   );
 }
