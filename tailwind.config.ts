@@ -1,6 +1,6 @@
-/* eslint-disable prettier/prettier */
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
+import { CSSRuleObject } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: [
@@ -40,7 +40,9 @@ const config: Config = {
           700: '#6B7280',
           800: '#374151',
           900: '#1F2937',
-          '4b': '#4b4b4b',
+          '4b': '#4B4B4B',
+          79: '#79747E',
+          a1: '#A1A1A1',
         },
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',
@@ -63,6 +65,7 @@ const config: Config = {
         'kv-orange': {
           DEFAULT: '#FF7C1D',
           light: '#FFF4E8',
+          lighter: '#FF472E',
         },
         'kv-yellow': {
           DEFAULT: '#FFC23D',
@@ -79,6 +82,7 @@ const config: Config = {
       screens: {
         pc: { min: '1200px' },
         tablet: { min: '768px', max: '1199px' },
+        mobile: { max: '768px' },
       },
       keyframes: {
         fadeIn: {
@@ -109,7 +113,7 @@ const config: Config = {
   },
   plugins: [
     plugin(({ addUtilities, theme }) => {
-      const newUtilities = {
+      const newUtilities: Record<string, CSSRuleObject> = {
         '.kv-text-3xl': {
           fontSize: theme('fontSize.kv-3xl[0]'),
           lineHeight: theme('fontSize.kv-3xl[1].lineHeight'),
@@ -147,7 +151,33 @@ const config: Config = {
           alignItems: 'center',
           justifyContent: 'center',
         },
-      } as Record<string, { [key: string]: string }>;
+        '.divider': {
+          'margin-bottom': '16px',
+          'margin-top': '24px',
+          'border-bottom-width': '1px',
+          'border-bottom-color': '#CBC9CF',
+        },
+
+        '.scrollbar-custom': {
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: '#f1f1f1',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#a1a1a1',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#555',
+          },
+          '&::-webkit-scrollbar-button': {
+            display: 'none',
+          },
+        },
+      };
       addUtilities(newUtilities);
     }),
   ],

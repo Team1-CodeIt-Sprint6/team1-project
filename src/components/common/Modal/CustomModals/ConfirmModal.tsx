@@ -2,7 +2,7 @@ import CheckIcon from 'public/assets/icons/icon_check.svg';
 
 import Button from '@/components/common/Button';
 import { BUTTON_TEXTS, DEFAULT_MESSAGES } from '@/constants/modalConstants';
-import { CustomModalProps } from '@/types/Modaltypes';
+import { CustomModalProps } from '@/types/modalTypes';
 
 export default function ConfirmModal({ message, onClose }: CustomModalProps) {
   return (
@@ -15,14 +15,14 @@ export default function ConfirmModal({ message, onClose }: CustomModalProps) {
       </div>
       <Button
         type="button"
-        onClick={onClose}
+        onClick={() => onClose('no')}
         className={`modal-button-common left-[65px] border-2 border-kv-primary-blue bg-white py-0 text-kv-lg text-kv-primary-blue hover:border-kv-blue hover:bg-kv-gray-200`}
       >
         {BUTTON_TEXTS.NO}
       </Button>
       <Button
         type="button"
-        onClick={onClose}
+        onClick={() => onClose('yes')}
         className={`modal-button-common right-[65px] bg-kv-primary-blue py-0 text-kv-md font-kv-bold text-white hover:bg-kv-blue`}
       >
         {BUTTON_TEXTS.YES}

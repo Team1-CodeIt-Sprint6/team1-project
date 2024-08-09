@@ -38,6 +38,7 @@ export default function LoginForm() {
 
   const mutation = useLogIn();
 
+
   const { openModal, closeModal, isOpen, modalType, message } = useModal();
 
   const onSubmit: SubmitHandler<LogInForm> = async (data) => {

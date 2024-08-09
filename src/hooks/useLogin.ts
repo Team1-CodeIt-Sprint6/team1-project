@@ -22,7 +22,6 @@ const useLogIn = () => {
     onSuccess: (data) => {
       setCookie('accessToken', data.accessToken);
       setCookie('refreshToken', data.refreshToken);
-      router.push('/'); // 로그인 성공 시 리다이렉트
     },
   });
 };
