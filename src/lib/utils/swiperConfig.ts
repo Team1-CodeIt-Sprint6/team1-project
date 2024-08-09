@@ -1,7 +1,6 @@
 import { Autoplay, Navigation } from 'swiper/modules';
 
 export const swiperConfig = {
-  spaceBetween: 10,
   slidesPerView: 1,
   autoplay: {
     delay: 3000,
