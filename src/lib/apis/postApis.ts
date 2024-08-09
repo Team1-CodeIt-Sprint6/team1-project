@@ -2,8 +2,16 @@ import { getCookie, setCookie } from 'cookies-next';
 
 import { UserProfile } from '@/components/userProfile/EditProfileForm';
 import instance from '@/lib/apis/axios';
+
+
 import { ActivityResponse, MyActivityForm } from '@/types/activityTypes';
-import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
+import {
+  LogInForm,
+  LogInResponse,
+  SignUpForm,
+  SignUpResponse,
+} from '@/types/AuthTypes';
+
 import {
   ReservationRequest,
   ReservationResponse,
@@ -75,5 +83,17 @@ export const createReservation = async (
     `/activities/${activityId}/reservations`,
     data,
   );
+  return response.data;
+};
+
+export const postSignup = async (
+  formData: SignUpForm,
+): Promise<SignUpResponse> => {
+  const { email, nickname, password } = formData;
+  const response = await instance.post<SignUpResponse>(`/users`, {
+    email,
+    nickname,
+    password,
+  });
   return response.data;
 };
