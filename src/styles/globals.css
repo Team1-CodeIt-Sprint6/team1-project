@@ -172,7 +172,6 @@
   }
 }
 
-<<<<<<< HEAD
 /* 예약카드 */
 @layer components {
   .container-header-reservation {
@@ -323,7 +322,6 @@
     @apply mb-5 text-kv-xl font-kv-bold;
   }
 }
-=======
 /* 체험 카드 */
 @layer components {
   .activity-card-title {
@@ -336,4 +334,3 @@
     @apply w-20 h-8 pc:w-[144px] pc:h-[43.08px] tablet:w-[112px] tablet:h-10 pc:text-kv-lg tablet:text-kv-lg text-kv-md font-kv-medium align-center !important;
   }
 }
->>>>>>> 2007586 (feat(GN-14): 내체험카드, 내예약카드 컴포넌트 추가)

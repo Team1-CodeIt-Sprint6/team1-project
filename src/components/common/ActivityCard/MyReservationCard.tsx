@@ -27,9 +27,7 @@ type MyReservationCardProps = {
   };
 };
 
-const MyReservationCard: React.FC<MyReservationCardProps> = ({
-  reservation,
-}) => {
+function MyReservationCard({ reservation }: MyReservationCardProps) {
   const getStatusTextAndColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -96,6 +94,6 @@ const MyReservationCard: React.FC<MyReservationCardProps> = ({
       </div>
     </MyCardContainer>
   );
-};
+}
 
 export default MyReservationCard;

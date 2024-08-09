@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+import KebabContainer from '@/components/common/Kebab/KebabContainer';
+import KebabDelete from '@/components/common/Kebab/KebabDelete';
+import KebabLink from '@/components/common/Kebab/KebabLink';
+
 import MyCardContainer from './MyCardLayout';
 
 type MyActivityCardProps = {
@@ -17,15 +21,10 @@ type MyActivityCardProps = {
     createdAt: string;
     updatedAt: string;
   };
-  onEdit: () => void;
   onDelete: () => void;
 };
 
-const MyActivityCard: React.FC<MyActivityCardProps> = ({
-  activity,
-  onEdit,
-  onDelete,
-}) => {
+function MyActivityCard({ activity, onDelete }: MyActivityCardProps) {
   return (
     <MyCardContainer
       imageSrc={activity.bannerImageUrl}
@@ -51,10 +50,13 @@ const MyActivityCard: React.FC<MyActivityCardProps> = ({
             /인
           </span>
         </p>
-        <div>케밥</div>
+        <KebabContainer>
+          <KebabLink href={`/edit/${activity.id}`}>수정하기</KebabLink>
+          <KebabDelete onClick={onDelete}>삭제하기</KebabDelete>
+        </KebabContainer>
       </div>
     </MyCardContainer>
   );
-};
+}
 
 export default MyActivityCard;
