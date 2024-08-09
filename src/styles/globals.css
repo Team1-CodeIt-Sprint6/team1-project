@@ -24,6 +24,10 @@
     @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
   }
 
+  .btn-outline {
+    @apply pc:w-[127px] tablet:w-[120px] pc:h-[53px] tablet:h-[53px] h-[41px] w-[90px] pc:px-5 tablet:px-4 px-3 rounded-[15px] border border-kv-primary-blue-light bg-white pc:kv-text-2lg tablet:kv-text-2lg kv-text-md font-kv-medium text-kv-gray-4b hover:bg-kv-gray-100 active:bg-kv-gray-200
+  }
+
   .base-button-default {
     @apply rounded-md py-[11px] text-kv-lg font-kv-bold;
   }
